@@ -156,6 +156,12 @@ LOGGING = {
     }
 }
 
+# Redirect login requests to this url.
+LOGIN_URL = '/login/'
+
+# View to redirect after login action.
+LOGIN_REDIRECT_URL = '/'
+
 # Load local settings configuration.
 try:
     LOCAL_SETTINGS
