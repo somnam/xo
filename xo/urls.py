@@ -21,4 +21,7 @@ urlpatterns = patterns(
     
     # Auth views
     url(r'^', include('auth.urls')),
+
+    # Go views
+    url(r'^go/', include('go.urls')),
 )
