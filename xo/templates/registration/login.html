@@ -4,32 +4,23 @@
 
 {% block content %}
 
-{% if form.errors %}
-<div id="form-error">
-    <p>The operation could not be performed because one or more error(s) occurred:</p>
-    <ul>
-        {% for field in form %}
-        <li>{{ field.errors }}</li>
-        {% endfor %}
-    </ul>
-</div>
-{% endif %}
+<div class="auth">
+    <form method="post" action="{% url auth.views.login %}">
+      {% csrf_token %}
 
-<form method="post" action="{% url auth.views.login %}">
-  {% csrf_token %}
+      {% for field in form %}
+        <div class="form-field">
+            {{ field.label_tag }} {{ field }}
+            {% if form.errors %}
+                {{ field.errors }}
+            {% endif %}
+        </div>
+      {% endfor %}
 
-  {% for field in form %}
-    <div id='form-field'>
-      {{ field.label_tag }}: {{ field }}
-    </div>
-  {% endfor %}
+      <input class="submit" type="submit" value="Login" />
+      <input type="hidden" name="next" value="{{ next }}" />
+    </form>
 
-  <input type="submit" value="Login" />
-  <input type="hidden" name="next" value="{{ next }}" />
-</form>
-
-<div>
-  <a href="{% url auth.views.register %}">Register.</a>
 </div>
 
 {% endblock %}
