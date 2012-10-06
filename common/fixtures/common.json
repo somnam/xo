@@ -1,0 +1,22 @@
+[
+  {
+    "pk": 1,
+    "model": "common.game",
+    "fields": {
+      "users": [
+        1,
+        2
+      ]
+    }
+  },
+  {
+    "pk": 2,
+    "model": "common.game",
+    "fields": {
+      "users": [
+        1,
+        2
+      ]
+    }
+  }
+]
