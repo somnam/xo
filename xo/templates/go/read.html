@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% load tags_extras %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/go/read.css" />
+{% endblock %}
+
+{% block header-nav %}
+<li><a href="#">add game</a></li>
+{% endblock %}
+
+{% block content %}
+
+<table id="go-games">
+  <caption>Available games</caption>
+  <colgroup>
+    <col id="identifier">
+    <col id="name">
+    <col id="players">
+    <col id="actions">
+    <tr>
+      <th scope="col">No.</th>
+      <th scope="col">Name</th>
+      <th scope="col">Players</th>
+      <th scope="col">Actions</th>
+    </tr>
+    {% for game in games %}
+
+    {% if forloop.counter|is_even %}
+    <tr class="alt">
+      {% else %}
+      <tr>
+        {% endif %}
+        <td>{{ game.id }}</td>
+        <td></td>
+        {% with users=game.users.all %}
+        <td>
+          {% for user in users %}
+          <span>{{ user }}</span>
+          {% endfor %}
+        </td>
+        <td>
+          {% if users.count < 2 %}
+          <a href="#">join</a> &#124;
+          {% endif %}
+          <a href="#">edit</a> &#124;
+          <a href="#">delete</a>
+        </td>
+        {% endwith %}
+      </tr>
+      {% endfor %}
+    </colgroup>
+  </table>
+
+{% endblock %}

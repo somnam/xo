@@ -1,0 +1,33 @@
+#go-games {
+    width: 98%;
+    border-collapse: collapse;
+}
+
+#go-games caption {
+    text-align: left;
+    font-size: 1.6em;
+    padding-bottom: 25px;
+}
+
+#go-games td, #go-games th {
+    font-size: 1.1em;
+    padding: 5px 10px 5px 10px;
+}
+
+#go-games th {
+    padding-top: 8px;
+    padding-bottom: 10px;
+}
+
+#go-games td {
+    text-align: center;
+}
+
+#go-games tr.alt td {
+    background-color: #dedede;
+}
+
+#go-games td a {
+    color: #121212;
+    text-transform: lowercase;
+}

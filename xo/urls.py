@@ -17,7 +17,7 @@ urlpatterns = patterns(
     # Uncomment the next line to enable the admin:
     # url(r'^admin/', include(admin.site.urls)),
 
-    url(r'^$', 'xo.views.home', name='home'),
+    url(r'^$', 'go.views.read', name='home'),
     
     # Auth views
     url(r'^', include('auth.urls')),

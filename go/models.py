@@ -5,15 +5,14 @@ from common.models import Game
 # Create your models here.
 
 # Board
+BOARD_SIZES = (
+    (u'9x9',   u'Small'),
+    (u'13x13', u'Regular'),
+    (u'19x19', u'Large'),
+)
 class Board(models.Model):
     game = models.OneToOneField(Game, primary_key=True)
-
-    sizes = (
-        (u'9x9',   u'Small'),
-        (u'13x13', u'Regular'),
-        (u'19x19', u'Large'),
-    )
-    size = models.CharField(max_length=5, choices=sizes, default='13x13')
+    size = models.CharField(max_length=5, choices=BOARD_SIZES, default='13x13')
 
     def __init__(self, *args, **kwargs):
         # Run base constructor
