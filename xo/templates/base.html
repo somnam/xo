@@ -1,45 +1,45 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
+  <head>
+    <meta charset="utf-8">
 
-        <title>{% block title %}{% endblock %}</title>
+    <title>{% block title %}{% endblock %}</title>
 
-        <!-- Base JS scripts. -->
-        <!-- <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script> -->
-        <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.min.js"></script>
+    <!-- Base JS scripts. -->
+    <!-- <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script> -->
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.min.js"></script>
 
-        <!-- Base css scripts. -->
-        <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/base.css" />
+    <!-- Base css scripts. -->
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/base.css" />
 
-        <!-- Custom css scripts. -->
-        {% block css %}{% endblock %}
-    </head>
-    <body>
-        <div id="site-header">
-            <div class="header-content">
-                <h1><a href="{% url auth.views.login %}">go</a></h1>
+    <!-- Custom css scripts. -->
+    {% block css %}{% endblock %}
+  </head>
+  <body>
+    <div id="site-header">
+      <div class="header-content">
+        <h1><a href="{% url auth.views.login %}">go</a></h1>
 
-                <div class="header-nav">
-                <ul>
-                    {% if user.is_authenticated %}
-                    {% block header-nav %}{% endblock %}
-                    <li><a href="{% url django.contrib.auth.views.logout_then_login %}">logout</a></li>
-                    {% else %}
-                    <li><a href="{% url auth.views.register %}">register</a></li>
-                    {% endif %}
-                </ul>
-                </div>
-            </div>
+        <div class="header-nav">
+          <ul>
+            {% if user.is_authenticated %}
+            {% block header-nav %}{% endblock %}
+            <li><a href="{% url django.contrib.auth.views.logout_then_login %}">logout</a></li>
+            {% else %}
+            <li><a href="{% url auth.views.register %}">register</a></li>
+            {% endif %}
+          </ul>
         </div>
+      </div>
+    </div>
 
-        <div id="content">
-            {% block content %}{% endblock %}
-        </div>
+    <div id="content">
+      {% block content %}{% endblock %}
+    </div>
 
-        <div id="footer"></div>
+    <div id="footer"></div>
 
-        <!-- Custom JS scripts. -->
-        {% block js %}{% endblock %}
-    </body>
+    <!-- Custom JS scripts. -->
+    {% block js %}{% endblock %}
+  </body>
 </html>
