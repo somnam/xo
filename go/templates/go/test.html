@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% load tags_extras %}
+
+{% block title %}Go board test.{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/go/test.css" />
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript" src="{{ STATIC_URL }}js/go/test.js"></script>
+{% endblock %}
+
+{% block content %}
+<div id="board">
+  {# Render top row #}
+  {% include 'go/includes/board_row_top.html' %}
+  {# Render center rows #}
+  {% for i in rows|add:"-1"|get_range %}
+  {% include 'go/includes/board_row_center.html' %}
+  {% endfor %}
+  {# render bottom row #}
+  {% include 'go/includes/board_row_bottom.html' %}
+
+</div>
+
+{% endblock %}
+

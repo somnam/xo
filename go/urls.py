@@ -17,5 +17,8 @@ urlpatterns = patterns(
 
     ## Delete game
     #url(r'^(?P<game_id>\d+)/delete/$', 'delete'),
+
+    # Test game board
+    url(r'^test/', 'test'),
 )
 

@@ -1,0 +1,31 @@
+{% load tags_extras %}
+
+<!-- left-top -->
+<div class="cell">
+  {% for i in 3|get_range %}
+  <div></div>
+  {% endfor %}
+  <div class="border-left border-top">
+  </div>
+</div>
+
+<!-- top -->
+{% for i in columns|add:'-1'|get_range %}
+<div class="cell">
+  {% for i in 2|get_range %}
+  <div></div>
+  {% endfor %}
+  <div class="border-top border-right"></div>
+  <div class="border-top"></div>
+</div>
+{% endfor %}
+
+<!-- top-right -->
+<div class="cell">
+  {% for i in 2|get_range %}
+  <div></div>
+  {% endfor %}
+  <div class="border-top border-right"></div>
+  <div></div>
+</div>
+

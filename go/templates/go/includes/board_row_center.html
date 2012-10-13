@@ -1,0 +1,26 @@
+{% load tags_extras %}
+
+<!-- left -->
+<div class="cell">
+  <div></div>
+  <div class="border-bottom border-left"></div>
+  <div></div>
+  <div class="border-left"></div>
+</div>
+<!-- center -->
+{% for i in columns|add:'-1'|get_range %}
+<div class="cell">
+  <div class="border-right border-bottom"></div>
+  <div class="border-bottom"></div>
+  <div class="border-right"></div>
+  <div></div>
+</div>
+{% endfor %}
+<!-- right -->
+<div class="cell">
+  <div class="border-right border-bottom"></div>
+  <div></div>
+  <div class="border-right"></div>
+  <div></div>
+</div>
+
