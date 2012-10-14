@@ -1,13 +1,13 @@
-{% extends 'base.html' %}
+{% extends "xo/base.html" %}
 
 {% load tags_extras %}
 
 {% block css %}
-<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/go/read.css" />
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}go/css/read.css" />
 {% endblock %}
 
 {% block header-nav %}
-<li><a href="#">add game</a></li>
+<li><a href="{% url go.views.create %}">add game</a></li>
 {% endblock %}
 
 {% block content %}
@@ -27,13 +27,15 @@
     </tr>
     {% for game in games %}
 
-    {% if forloop.counter|is_even %}
-    <tr class="alt">
+      {% if forloop.counter|is_even %}
+      <tr class="alt">
       {% else %}
       <tr>
-        {% endif %}
+      {% endif %}
+
         <td>{{ game.id }}</td>
         <td></td>
+
         {% with users=game.users.all %}
         <td>
           {% for user in users %}
@@ -48,6 +50,7 @@
           <a href="#">delete</a>
         </td>
         {% endwith %}
+
       </tr>
       {% endfor %}
     </colgroup>

@@ -59,22 +59,17 @@ body {
     max-width: 960px;
 }
 
-.auth {
-    margin: 0 auto;
-    width: 250px;
-}
-
-.auth .form-field {
+.form-field {
     margin-bottom: 20px;
 }
 
-.auth .form-field label {
+.form-field label {
     color: #323232;
     font-size: small;
     font-style: italic;
 }
 
-.auth .form-field input {
+.form-field input {
     display: block;
     width: 90%;
 
@@ -88,7 +83,7 @@ body {
     color: #777;
 }
 
-.auth .submit {
+.submit {
     height: 3em;
     padding: 0 1em;
     

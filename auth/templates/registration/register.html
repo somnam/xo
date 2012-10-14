@@ -1,24 +1,17 @@
-{% extends  "base.html" %}
+{% extends  "registration/base.html" %}
 
 {% block title %} Signup now ! {% endblock %}
 
 {% block content %}
 
 <div class="auth">
-    <form method="post" action="">
-        {% csrf_token %}
+  <form method="post" action="">
+    {% csrf_token %}
 
-        {% for field in form %}
-        <div class="form-field">
-            {{ field.label_tag }} {{ field }}
-            {% if form.errors %}
-            {{ field.errors }}
-            {% endif %}
-        </div>
-        {% endfor %}
+    {% include "xo/includes/form.html" %}
 
-        <input class="submit" type="submit" value="Create account" />
-    </form>
+    <input class="submit" type="submit" value="Create account" />
+  </form>
 </div>
 
 {% endblock %}

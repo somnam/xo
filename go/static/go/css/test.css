@@ -7,7 +7,7 @@
     **/
     width: 500px;
     height: 500px;
-    background: url('../../images/go/wood.jpg');
+    background: url('../images/wood.jpg');
     margin: 0 auto;
     border: 1px solid #000;
 }
