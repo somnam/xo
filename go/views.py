@@ -4,9 +4,9 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
 @login_required
-def read(request):
+def game_list(request):
 
-    return render(request, 'go/read.html', {
+    return render(request, 'go/game_list.html', {
         'games' : request.user.game_set.all()
     })
 

@@ -3,11 +3,11 @@
 {% load tags_extras %}
 
 {% block css %}
-<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}go/css/read.css" />
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}go/css/game_list.css" />
 {% endblock %}
 
 {% block header-nav %}
-<li><a href="{% url go.views.create %}">add game</a></li>
+<li><a href="{% url go.views.game_create %}">add game</a></li>
 {% endblock %}
 
 {% block content %}
@@ -27,11 +27,7 @@
     </tr>
     {% for game in games %}
 
-      {% if forloop.counter|is_even %}
-      <tr class="alt">
-      {% else %}
-      <tr>
-      {% endif %}
+      <tr class="{% cycle '' 'alt' %}">
 
         <td>{{ game.id }}</td>
         <td></td>
