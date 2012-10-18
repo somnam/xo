@@ -1,0 +1,20 @@
+{% extends "xo/base.html" %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}go/css/game_create.css" />
+{% endblock %}
+
+{% block content %}
+
+<div class="game-create">
+  <form method="post" action="{% url go.views.game_create %}">
+    {% csrf_token %}
+
+    {% include "xo/includes/form.html" %}
+
+    <input class="submit" type="submit" value="Create" />
+
+  </form>
+</div>
+
+{% endblock %}

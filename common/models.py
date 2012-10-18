@@ -6,4 +6,5 @@ from django.contrib.auth.models import User
 # Game class
 class Game(models.Model):
     users = models.ManyToManyField(User)
+    name  = models.CharField(max_length=128)
 

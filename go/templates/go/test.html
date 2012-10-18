@@ -13,7 +13,7 @@
 {% endblock %}
 
 {% block content %}
-<div id="board">
+<div id="board" class="board size-{{ size }}">
   {# Render top row #}
   {% include 'go/includes/board_row_top.html' %}
   {# Render center rows #}

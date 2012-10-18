@@ -23,7 +23,7 @@ class BoardTest(TestCase):
         self.assertIsInstance(board, Board)
         self.assertEqual(board.size, "13x13")
         self.assertEqual(board.rows, 13)
-        self.assertEqual(board.cols, 13)
+        self.assertEqual(board.columns, 13)
 
         # CASE
         print("Create Board instance of defined size")
@@ -31,7 +31,7 @@ class BoardTest(TestCase):
         board.save()
         self.assertEqual(board.size, "9x9")
         self.assertEqual(board.rows, 9)
-        self.assertEqual(board.cols, 9)
+        self.assertEqual(board.columns, 9)
 
     def test_assing_board_to_game(self):
         print("")

@@ -1,15 +1,27 @@
-#board {
-    max-width: 700px;
+.board {
+    background: url('../images/wood.jpg');
+    margin: 0 auto;
+    border: 1px solid #000;
+}
 
+.size-9x9 {
+    width: 250px;
+    height: 250px;
+}
+
+.size-13x13 {
+    width: 350px;
+    height: 350px;
+}
+
+.size-19x19 {
+    max-width: 700px;
     /**
     width: 1000px;
     height: 1000px;
     **/
     width: 500px;
     height: 500px;
-    background: url('../images/wood.jpg');
-    margin: 0 auto;
-    border: 1px solid #000;
 }
 
 div.cell {

@@ -6,19 +6,16 @@ urlpatterns = patterns(
     # Get list of games
     url(r'^$', 'game_list'),
 
-    ## Create new game
-    #url(r'^create/', 'game_create'),
+    # Create new game
+    url(r'^create/', 'game_create'),
 
     ## Join game
-    #url(r'^(?P<game_id>\d+)/join/$', 'join'),
+    url(r'^(?P<game_id>\d+)/join/$', 'game_join'),
 
     ## Update game
     #url(r'^(?P<game_id>\d+)/update/$', 'update'),
 
     ## Delete game
-    #url(r'^(?P<game_id>\d+)/delete/$', 'delete'),
-
-    # Test game board
-    url(r'^test/', 'test'),
+    url(r'^(?P<game_id>\d+)/delete/$', 'game_delete'),
 )
 

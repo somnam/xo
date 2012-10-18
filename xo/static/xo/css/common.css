@@ -83,6 +83,18 @@ body {
     color: #777;
 }
 
+.form-field select {
+    display: block;
+
+    margin-top: 5px;
+
+    border: 1px solid #bcbcbc;
+
+    background-color: #fff;
+    font-size: medium;
+    color: #777;
+}
+
 .submit {
     height: 3em;
     padding: 0 1em;

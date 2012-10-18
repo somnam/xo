@@ -18,19 +18,21 @@
     <col id="identifier">
     <col id="name">
     <col id="players">
+    <col id="size">
     <col id="actions">
     <tr>
       <th scope="col">No.</th>
       <th scope="col">Name</th>
       <th scope="col">Players</th>
+      <th scope="col">Size</th>
       <th scope="col">Actions</th>
     </tr>
     {% for game in games %}
 
       <tr class="{% cycle '' 'alt' %}">
 
-        <td>{{ game.id }}</td>
-        <td></td>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ game.name }}</td>
 
         {% with users=game.users.all %}
         <td>
@@ -38,12 +40,15 @@
           <span>{{ user }}</span>
           {% endfor %}
         </td>
+
+        <td>{{ game.board.size }}</td>
+
         <td>
           {% if users.count < 2 %}
-          <a href="#">join</a> &#124;
+          <a href="{% url go.views.game_join game.id %}">join</a> &#124;
           {% endif %}
           <a href="#">edit</a> &#124;
-          <a href="#">delete</a>
+          <a href="{% url go.views.game_delete game.id %}">delete</a>
         </td>
         {% endwith %}
 

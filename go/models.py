@@ -19,7 +19,7 @@ class Board(models.Model):
         super(Board, self).__init__(*args, **kwargs)
 
         # Set rows and cols values
-        self.rows,self.cols = map(
+        self.rows,self.columns = map(
             lambda(c) : int(c),
             self.size.split('x')
         )
