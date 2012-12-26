@@ -53,7 +53,7 @@ class GameTest(TestCase):
             self.assertIsInstance(game, Game)
             self.assertEqual(game.id, 1)
             print("Get all Game instances for User %s" % user)
-            self.assertEqual(user.game_set.all().count(), 1)
+            self.assertEqual(user.game_set.count(), 1)
 
         # CASE
         print("Remove Users from Game")
