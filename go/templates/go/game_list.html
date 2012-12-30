@@ -27,34 +27,47 @@
       <th scope="col">Size</th>
       <th scope="col">Actions</th>
     </tr>
+
     {% for game in games %}
+    <tr class="{% cycle '' 'alt' %}">
 
-      <tr class="{% cycle '' 'alt' %}">
+      <td>{{ forloop.counter }}</td>
+      <td>{{ game.name }}</td>
 
-        <td>{{ forloop.counter }}</td>
-        <td>{{ game.name }}</td>
+      {% with users=game.users.all %}
+      <td>
+        {% for user in users %}
+        <span>{{ user }}</span>
+        {% endfor %}
+      </td>
 
-        {% with users=game.users.all %}
-        <td>
-          {% for user in users %}
-          <span>{{ user }}</span>
-          {% endfor %}
-        </td>
+      <td>{{ game.board.size }}</td>
 
-        <td>{{ game.board.size }}</td>
-
-        <td>
-          {% if users.count < 2 %}
-          <a href="{% url go.views.game_join game.id %}">join</a> &#124;
+      <td>
+        {% if users.count < 2 %}
+          {# User exists in current game #}
+          {% if user in users %}
+          {% else %}
           {% endif %}
-          <a href="#">edit</a> &#124;
-          <a href="{% url go.views.game_delete game.id %}">delete</a>
-        </td>
-        {% endwith %}
+        {% endif %}
 
-      </tr>
-      {% endfor %}
-    </colgroup>
-  </table>
+        {# User can manage current game #}
+        {% if user in users %}
+        <a href="{% url go.views.game_play game.id %}">play</a> &#124;
+        <a href="{% url go.views.game_edit game.id %}">edit</a> &#124;
+        <a href="{% url go.views.game_delete game.id %}">delete</a>
+        {# User can be added to game #}
+        {% elif users.count < 2 %}
+        <a href="{% url go.views.game_join game.id %}">join</a>
+        {% endif %}
+
+      </td>
+      {% endwith %}
+
+    </tr>
+    {% endfor %}
+
+  </colgroup>
+</table>
 
 {% endblock %}

@@ -12,18 +12,20 @@
 <script type="text/javascript" src="{{ STATIC_URL }}go/js/test.js"></script>
 {% endblock %}
 
+
 {% block content %}
-<div id="board" class="board size-{{ size }}">
+<div id="{{ board.game_id }}_board" class="board size-{{ board.size }}">
   {# Render top row #}
   {% include 'go/includes/board_row_top.html' %}
+
   {# Render center rows #}
-  {% for i in rows|add:"-1"|get_range %}
+  {% for row in board.rows|add:"-1"|get_range:1 %}
   {% include 'go/includes/board_row_center.html' %}
   {% endfor %}
+
   {# render bottom row #}
   {% include 'go/includes/board_row_bottom.html' %}
-
 </div>
+<div>Color: {{ stone_color }}</div>
 
 {% endblock %}
-

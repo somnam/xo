@@ -1,4 +1,4 @@
-from go.models import Board, BOARD_SIZES
+from go.models import Board, BOARD_SIZES, STONE_COLORS
 from common.models import Game
 from django import forms
 
@@ -25,8 +25,13 @@ class GameCreateForm(forms.Form):
         
         # Create a new Board instance and assign it to created game
         board = Board(game_id=game.id, size=self.cleaned_data['size'])
-        board.save()
 
-        # TODO: create Cell/Stone instances
+        # Create black Stone instances for first player.
+        # Second player will have white stones.
+        board.add_stones(self.user.id, STONE_COLORS['black'])
 
         return game
+
+class GameEditForm(GameCreateForm):
+    # TODO
+    pass

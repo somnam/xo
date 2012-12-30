@@ -1,28 +1,39 @@
 {% load tags_extras %}
+{% load test_extras %}
 
 <!-- left-bottom -->
-<div class="cell">
+{% with board.rows|make_cell_id:0 as cell_id %}
+<div id="{{ cell_id }}_cell" class="cell">
   <div></div>
   <div class="border-bottom border-left"></div>
-  {% for i in 2|get_range %}
+  {% for _ in 2|get_range %}
   <div></div>
   {% endfor %}
+  {% include 'go/includes/stone.html' %}
 </div>
+{% endwith %}
+
 <!-- bottom -->
-{% for i in columns|add:'-1'|get_range %}
-<div class="cell">
-  <div class="border-right border-bottom"></div>
-  <div class="border-bottom"></div>
-  {% for i in 2|get_range %}
-  <div></div>
-  {% endfor %}
-</div>
+{% for col in board.columns|add:'-1'|get_range:1 %}
+  {% with board.rows|make_cell_id:col as cell_id %}
+  <div id="{{ cell_id }}_cell" class="cell">
+    <div class="border-right border-bottom"></div>
+    <div class="border-bottom"></div>
+    {% for i in 2|get_range %}
+    <div></div>
+    {% endfor %}
+    {% include 'go/includes/stone.html' %}
+  </div>
+  {% endwith %}
 {% endfor %}
+
 <!-- right-bottom -->
-<div class="cell">
+{% with board.rows|make_cell_id:board.columns as cell_id %}
+<div id="{{ cell_id }}_cell" class="cell">
   <div class="border-right border-bottom"></div>
   {% for i in 3|get_range %}
   <div></div>
   {% endfor %}
+  {% include 'go/includes/stone.html' %}
 </div>
-
+{% endwith %}

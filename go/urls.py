@@ -9,13 +9,19 @@ urlpatterns = patterns(
     # Create new game
     url(r'^create/', 'game_create'),
 
-    ## Join game
+    # Join game
     url(r'^(?P<game_id>\d+)/join/$', 'game_join'),
 
-    ## Update game
-    #url(r'^(?P<game_id>\d+)/update/$', 'update'),
+    # Play game
+    url(r'^(?P<game_id>\d+)/play/$', 'game_play'),
 
-    ## Delete game
+    # Edit game settings
+    url(r'^(?P<game_id>\d+)/edit/$', 'game_edit'),
+
+    # Update game state
+    url(r'^(?P<game_id>\d+)/update/$', 'game_update'),
+
+    # Delete game
     url(r'^(?P<game_id>\d+)/delete/$', 'game_delete'),
 )
 

@@ -1,0 +1,7 @@
+{% load test_extras %}
+
+{% with stones|get_stone:cell_id as stone %}
+  {% if stone %}
+  <div class="stone block {{ stone }}"></div>
+  {% endif %}
+{% endwith %}
