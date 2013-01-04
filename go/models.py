@@ -77,7 +77,8 @@ class Board(models.Model):
 
         placed_stones = self.get_placed_stones()
 
-        color_code = None
+        # By default set 'white' as latest placed color
+        color_code = STONE_COLORS['white']
         if placed_stones.count():
             color_code = placed_stones.latest().color
 

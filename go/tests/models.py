@@ -124,6 +124,13 @@ class BoardTestWithGoFixture(TestCase):
     # Load fixtures
     fixtures = ['auth', 'common', 'go']
 
+    def test_GetLatestPlacedStoneColorCode_GetColorForEmptyBoard_ReturnsColorCode(self):
+        "Get color code of latest placed stone for empty board."
+
+        board = Board()
+        board.save()
+        self.assertEqual(board.get_latest_placed_stone_color_code(), 1)
+
     def test_GetLatestPlacedStoneColorCode_GetColor_ReturnsColorCode(self):
         "Get color code of latest placed stone."
 
