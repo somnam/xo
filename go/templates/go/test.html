@@ -26,6 +26,12 @@
   {# render bottom row #}
   {% include 'go/includes/board_row_bottom.html' %}
 </div>
-<div>Color: {{ stone_color }}</div>
+<div>
+  Color: {{ stone_color }}
+</div>
+<div>
+  Next move: 
+  <span id="{{ board.game_id }}_next_move_color">{{ next_move_color }}</span>
+</div>
 
 {% endblock %}

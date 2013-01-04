@@ -2,10 +2,13 @@ $(document).ready(function() {
     poll();
 });
 
+function getBoardId() {
+    var board = $('.board');
+    return board.attr("id").replace("_board", "");
+}
+
 function getUpdateUrl() {
-    var board    = $('.board');
-    var board_id = board.attr("id").replace("_board", "");
-    return '/go/' + board_id + '/update/';
+    return '/go/' + getBoardId() + '/update/';
 }
 
 $(".cell").click(function() {
@@ -24,9 +27,23 @@ $(".cell").click(function() {
     });
 });
 
+// Update board state after other players move.
+function poll() {
+    $.ajax({
+        type        : "POST",
+        url         : getUpdateUrl(),
+        dataType    : "json",
+        beforeSend  : addCSRFToken,
+        success     : updateBoard,
+    });
+}
+
 // Update board after second players move.
-function updateBoard(stones) {
-    if (stones) {
+function updateBoard(response) {
+    if (response) {
+        var stones          = response['placed_stones'],
+            next_move_color = response['next_move_color'];
+
         // Clear all current stones from board
         $('.stone').remove();
 
@@ -38,6 +55,11 @@ function updateBoard(stones) {
                 addStone(fields);
             }
         }
+
+        // Update next move info
+        var nextMoveSpanId      = getBoardId() + "_next_move_color";
+        var nextMoveSpan        = document.getElementById(nextMoveSpanId);
+        nextMoveSpan.innerHTML  = response['next_move_color'];
     }
 
     return setTimeout(poll, 0);
@@ -62,13 +84,3 @@ function addStone(stone) {
     }
 }
 
-// Update board state after other players move.
-function poll() {
-    $.ajax({
-        type        : "POST",
-        url         : getUpdateUrl(),
-        dataType    : "json",
-        beforeSend  : addCSRFToken,
-        success     : updateBoard,
-    });
-}

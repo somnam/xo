@@ -1,0 +1,981 @@
+[
+  {
+    "pk": 1,
+    "model": "go.board",
+    "fields": {
+      "size": "9x9"
+    }
+  },
+  {
+    "pk": 1,
+    "model": "go.stone",
+    "fields": {
+      "color": 0,
+      "user": 1,
+      "set_date": "2013-01-03T16:35:33.629Z",
+      "board": 1,
+      "col": 0,
+      "row": 0
+    }
+  },
+  {
+    "pk": 2,
+    "model": "go.stone",
+    "fields": {
+      "color": 0,
+      "user": 1,
+      "set_date": "2013-01-03T16:35:33.664Z",
+      "board": 1,
+      "col": 1,
+      "row": 1
+    }
+  },
+  {
+    "pk": 3,
+    "model": "go.stone",
+    "fields": {
+      "color": 0,
+      "user": 1,
+      "set_date": "2013-01-03T16:35:33.692Z",
+      "board": 1,
+      "col": -1,
+      "row": -1
+    }
+  },
+  {
+    "pk": 4,
+    "model": "go.stone",
+    "fields": {
+      "color": 0,
+      "user": 1,
+      "set_date": "2013-01-03T16:35:33.708Z",
+      "board": 1,
+      "col": -1,
+      "row": -1
+    }
+  },
+  {
+    "pk": 5,
+    "model": "go.stone",
+    "fields": {
+      "color": 0,
+      "user": 1,
+      "set_date": "2013-01-03T16:35:33.726Z",
+      "board": 1,
+      "col": -1,
+      "row": -1
+    }
+  },
+  {
+    "pk": 6,
+    "model": "go.stone",
+    "fields": {
+      "color": 0,
+      "user": 1,
+      "set_date": "2013-01-03T16:35:33.756Z",
+      "board": 1,
+      "col": -1,
+      "row": -1
+    }
+  },
+  {
+    "pk": 7,
+    "model": "go.stone",
+    "fields": {
+      "color": 0,
+      "user": 1,
+      "set_date": "2013-01-03T16:35:33.773Z",
+      "board": 1,
+      "col": -1,
+      "row": -1
+    }
+  },
+  {
+    "pk": 8,
+    "model": "go.stone",
+    "fields": {
+      "color": 0,
+      "user": 1,
+      "set_date": "2013-01-03T16:35:33.789Z",
+      "board": 1,
+      "col": -1,
+      "row": -1
+    }
+  },
+  {
+    "pk": 9,
+    "model": "go.stone",
+    "fields": {
+      "color": 0,
+      "user": 1,
+      "set_date": "2013-01-03T16:35:33.806Z",
+      "board": 1,
+      "col": -1,
+      "row": -1
+    }
+  },
+  {
+    "pk": 10,
+    "model": "go.stone",
+    "fields": {
+      "color": 0,
+      "user": 1,
+      "set_date": "2013-01-03T16:35:33.826Z",
+      "board": 1,
+      "col": -1,
+      "row": -1
+    }
+  },
+  {
+    "pk": 11,
+    "model": "go.stone",
+    "fields": {
+      "color": 0,
+      "user": 1,
+      "set_date": "2013-01-03T16:35:33.848Z",
+      "board": 1,
+      "col": -1,
+      "row": -1
+    }
+  },
+  {
+    "pk": 12,
+    "model": "go.stone",
+    "fields": {
+      "color": 0,
+      "user": 1,
+      "set_date": "2013-01-03T16:35:33.868Z",
+      "board": 1,
+      "col": -1,
+      "row": -1
+    }
+  },
+  {
+    "pk": 13,
+    "model": "go.stone",
+    "fields": {
+      "color": 0,
+      "user": 1,
+      "set_date": "2013-01-03T16:35:33.886Z",
+      "board": 1,
+      "col": -1,
+      "row": -1
+    }
+  },
+  {
+    "pk": 14,
+    "model": "go.stone",
+    "fields": {
+      "color": 0,
+      "user": 1,
+      "set_date": "2013-01-03T16:35:33.903Z",
+      "board": 1,
+      "col": -1,
+      "row": -1
+    }
+  },
+  {
+    "pk": 15,
+    "model": "go.stone",
+    "fields": {
+      "color": 0,
+      "user": 1,
+      "set_date": "2013-01-03T16:35:33.923Z",
+      "board": 1,
+      "col": -1,
+      "row": -1
+    }
+  },
+  {
+    "pk": 16,
+    "model": "go.stone",
+    "fields": {
+      "color": 0,
+      "user": 1,
+      "set_date": "2013-01-03T16:35:33.953Z",
+      "board": 1,
+      "col": -1,
+      "row": -1
+    }
+  },
+  {
+    "pk": 17,
+    "model": "go.stone",
+    "fields": {
+      "color": 0,
+      "user": 1,
+      "set_date": "2013-01-03T16:35:33.987Z",
+      "board": 1,
+      "col": -1,
+      "row": -1
+    }
+  },
+  {
+    "pk": 18,
+    "model": "go.stone",
+    "fields": {
+      "color": 0,
+      "user": 1,
+      "set_date": "2013-01-03T16:35:34.008Z",
+      "board": 1,
+      "col": -1,
+      "row": -1
+    }
+  },
+  {
+    "pk": 19,
+    "model": "go.stone",
+    "fields": {
+      "color": 0,
+      "user": 1,
+      "set_date": "2013-01-03T16:35:34.044Z",
+      "board": 1,
+      "col": -1,
+      "row": -1
+    }
+  },
+  {
+    "pk": 20,
+    "model": "go.stone",
+    "fields": {
+      "color": 0,
+      "user": 1,
+      "set_date": "2013-01-03T16:35:34.067Z",
+      "board": 1,
+      "col": -1,
+      "row": -1
+    }
+  },
+  {
+    "pk": 21,
+    "model": "go.stone",
+    "fields": {
+      "color": 0,
+      "user": 1,
+      "set_date": "2013-01-03T16:35:34.089Z",
+      "board": 1,
+      "col": -1,
+      "row": -1
+    }
+  },
+  {
+    "pk": 22,
+    "model": "go.stone",
+    "fields": {
+      "color": 0,
+      "user": 1,
+      "set_date": "2013-01-03T16:35:34.114Z",
+      "board": 1,
+      "col": -1,
+      "row": -1
+    }
+  },
+  {
+    "pk": 23,
+    "model": "go.stone",
+    "fields": {
+      "color": 0,
+      "user": 1,
+      "set_date": "2013-01-03T16:35:34.162Z",
+      "board": 1,
+      "col": -1,
+      "row": -1
+    }
+  },
+  {
+    "pk": 24,
+    "model": "go.stone",
+    "fields": {
+      "color": 0,
+      "user": 1,
+      "set_date": "2013-01-03T16:35:34.190Z",
+      "board": 1,
+      "col": -1,
+      "row": -1
+    }
+  },
+  {
+    "pk": 25,
+    "model": "go.stone",
+    "fields": {
+      "color": 0,
+      "user": 1,
+      "set_date": "2013-01-03T16:35:34.505Z",
+      "board": 1,
+      "col": -1,
+      "row": -1
+    }
+  },
+  {
+    "pk": 26,
+    "model": "go.stone",
+    "fields": {
+      "color": 0,
+      "user": 1,
+      "set_date": "2013-01-03T16:35:34.561Z",
+      "board": 1,
+      "col": -1,
+      "row": -1
+    }
+  },
+  {
+    "pk": 27,
+    "model": "go.stone",
+    "fields": {
+      "color": 0,
+      "user": 1,
+      "set_date": "2013-01-03T16:35:34.598Z",
+      "board": 1,
+      "col": -1,
+      "row": -1
+    }
+  },
+  {
+    "pk": 28,
+    "model": "go.stone",
+    "fields": {
+      "color": 0,
+      "user": 1,
+      "set_date": "2013-01-03T16:35:34.621Z",
+      "board": 1,
+      "col": -1,
+      "row": -1
+    }
+  },
+  {
+    "pk": 29,
+    "model": "go.stone",
+    "fields": {
+      "color": 0,
+      "user": 1,
+      "set_date": "2013-01-03T16:35:34.637Z",
+      "board": 1,
+      "col": -1,
+      "row": -1
+    }
+  },
+  {
+    "pk": 30,
+    "model": "go.stone",
+    "fields": {
+      "color": 0,
+      "user": 1,
+      "set_date": "2013-01-03T16:35:34.673Z",
+      "board": 1,
+      "col": -1,
+      "row": -1
+    }
+  },
+  {
+    "pk": 31,
+    "model": "go.stone",
+    "fields": {
+      "color": 0,
+      "user": 1,
+      "set_date": "2013-01-03T16:35:34.708Z",
+      "board": 1,
+      "col": -1,
+      "row": -1
+    }
+  },
+  {
+    "pk": 32,
+    "model": "go.stone",
+    "fields": {
+      "color": 0,
+      "user": 1,
+      "set_date": "2013-01-03T16:35:34.753Z",
+      "board": 1,
+      "col": -1,
+      "row": -1
+    }
+  },
+  {
+    "pk": 33,
+    "model": "go.stone",
+    "fields": {
+      "color": 0,
+      "user": 1,
+      "set_date": "2013-01-03T16:35:34.776Z",
+      "board": 1,
+      "col": -1,
+      "row": -1
+    }
+  },
+  {
+    "pk": 34,
+    "model": "go.stone",
+    "fields": {
+      "color": 0,
+      "user": 1,
+      "set_date": "2013-01-03T16:35:34.812Z",
+      "board": 1,
+      "col": -1,
+      "row": -1
+    }
+  },
+  {
+    "pk": 35,
+    "model": "go.stone",
+    "fields": {
+      "color": 0,
+      "user": 1,
+      "set_date": "2013-01-03T16:35:34.834Z",
+      "board": 1,
+      "col": -1,
+      "row": -1
+    }
+  },
+  {
+    "pk": 36,
+    "model": "go.stone",
+    "fields": {
+      "color": 0,
+      "user": 1,
+      "set_date": "2013-01-03T16:35:34.857Z",
+      "board": 1,
+      "col": -1,
+      "row": -1
+    }
+  },
+  {
+    "pk": 37,
+    "model": "go.stone",
+    "fields": {
+      "color": 0,
+      "user": 1,
+      "set_date": "2013-01-03T16:35:34.901Z",
+      "board": 1,
+      "col": -1,
+      "row": -1
+    }
+  },
+  {
+    "pk": 38,
+    "model": "go.stone",
+    "fields": {
+      "color": 0,
+      "user": 1,
+      "set_date": "2013-01-03T16:35:34.925Z",
+      "board": 1,
+      "col": -1,
+      "row": -1
+    }
+  },
+  {
+    "pk": 39,
+    "model": "go.stone",
+    "fields": {
+      "color": 0,
+      "user": 1,
+      "set_date": "2013-01-03T16:35:34.941Z",
+      "board": 1,
+      "col": -1,
+      "row": -1
+    }
+  },
+  {
+    "pk": 40,
+    "model": "go.stone",
+    "fields": {
+      "color": 0,
+      "user": 1,
+      "set_date": "2013-01-03T16:35:34.961Z",
+      "board": 1,
+      "col": -1,
+      "row": -1
+    }
+  },
+  {
+    "pk": 41,
+    "model": "go.stone",
+    "fields": {
+      "color": 0,
+      "user": 1,
+      "set_date": "2013-01-03T16:35:35.008Z",
+      "board": 1,
+      "col": -1,
+      "row": -1
+    }
+  },
+  {
+    "pk": 42,
+    "model": "go.stone",
+    "fields": {
+      "color": 1,
+      "user": 2,
+      "set_date": "2013-01-03T16:35:44.273Z",
+      "board": 1,
+      "col": 0,
+      "row": 1
+    }
+  },
+  {
+    "pk": 43,
+    "model": "go.stone",
+    "fields": {
+      "color": 1,
+      "user": 2,
+      "set_date": "2013-01-03T16:35:44.294Z",
+      "board": 1,
+      "col": 1,
+      "row": 0
+    }
+  },
+  {
+    "pk": 44,
+    "model": "go.stone",
+    "fields": {
+      "color": 1,
+      "user": 2,
+      "set_date": "2013-01-03T16:35:44.310Z",
+      "board": 1,
+      "col": -1,
+      "row": -1
+    }
+  },
+  {
+    "pk": 45,
+    "model": "go.stone",
+    "fields": {
+      "color": 1,
+      "user": 2,
+      "set_date": "2013-01-03T16:35:44.359Z",
+      "board": 1,
+      "col": -1,
+      "row": -1
+    }
+  },
+  {
+    "pk": 46,
+    "model": "go.stone",
+    "fields": {
+      "color": 1,
+      "user": 2,
+      "set_date": "2013-01-03T16:35:44.402Z",
+      "board": 1,
+      "col": -1,
+      "row": -1
+    }
+  },
+  {
+    "pk": 47,
+    "model": "go.stone",
+    "fields": {
+      "color": 1,
+      "user": 2,
+      "set_date": "2013-01-03T16:35:44.454Z",
+      "board": 1,
+      "col": -1,
+      "row": -1
+    }
+  },
+  {
+    "pk": 48,
+    "model": "go.stone",
+    "fields": {
+      "color": 1,
+      "user": 2,
+      "set_date": "2013-01-03T16:35:44.485Z",
+      "board": 1,
+      "col": -1,
+      "row": -1
+    }
+  },
+  {
+    "pk": 49,
+    "model": "go.stone",
+    "fields": {
+      "color": 1,
+      "user": 2,
+      "set_date": "2013-01-03T16:35:44.585Z",
+      "board": 1,
+      "col": -1,
+      "row": -1
+    }
+  },
+  {
+    "pk": 50,
+    "model": "go.stone",
+    "fields": {
+      "color": 1,
+      "user": 2,
+      "set_date": "2013-01-03T16:35:44.838Z",
+      "board": 1,
+      "col": -1,
+      "row": -1
+    }
+  },
+  {
+    "pk": 51,
+    "model": "go.stone",
+    "fields": {
+      "color": 1,
+      "user": 2,
+      "set_date": "2013-01-03T16:35:44.857Z",
+      "board": 1,
+      "col": -1,
+      "row": -1
+    }
+  },
+  {
+    "pk": 52,
+    "model": "go.stone",
+    "fields": {
+      "color": 1,
+      "user": 2,
+      "set_date": "2013-01-03T16:35:44.876Z",
+      "board": 1,
+      "col": -1,
+      "row": -1
+    }
+  },
+  {
+    "pk": 53,
+    "model": "go.stone",
+    "fields": {
+      "color": 1,
+      "user": 2,
+      "set_date": "2013-01-03T16:35:44.898Z",
+      "board": 1,
+      "col": -1,
+      "row": -1
+    }
+  },
+  {
+    "pk": 54,
+    "model": "go.stone",
+    "fields": {
+      "color": 1,
+      "user": 2,
+      "set_date": "2013-01-03T16:35:44.920Z",
+      "board": 1,
+      "col": -1,
+      "row": -1
+    }
+  },
+  {
+    "pk": 55,
+    "model": "go.stone",
+    "fields": {
+      "color": 1,
+      "user": 2,
+      "set_date": "2013-01-03T16:35:44.938Z",
+      "board": 1,
+      "col": -1,
+      "row": -1
+    }
+  },
+  {
+    "pk": 56,
+    "model": "go.stone",
+    "fields": {
+      "color": 1,
+      "user": 2,
+      "set_date": "2013-01-03T16:35:44.961Z",
+      "board": 1,
+      "col": -1,
+      "row": -1
+    }
+  },
+  {
+    "pk": 57,
+    "model": "go.stone",
+    "fields": {
+      "color": 1,
+      "user": 2,
+      "set_date": "2013-01-03T16:35:44.977Z",
+      "board": 1,
+      "col": -1,
+      "row": -1
+    }
+  },
+  {
+    "pk": 58,
+    "model": "go.stone",
+    "fields": {
+      "color": 1,
+      "user": 2,
+      "set_date": "2013-01-03T16:35:44.997Z",
+      "board": 1,
+      "col": -1,
+      "row": -1
+    }
+  },
+  {
+    "pk": 59,
+    "model": "go.stone",
+    "fields": {
+      "color": 1,
+      "user": 2,
+      "set_date": "2013-01-03T16:35:45.020Z",
+      "board": 1,
+      "col": -1,
+      "row": -1
+    }
+  },
+  {
+    "pk": 60,
+    "model": "go.stone",
+    "fields": {
+      "color": 1,
+      "user": 2,
+      "set_date": "2013-01-03T16:35:45.058Z",
+      "board": 1,
+      "col": -1,
+      "row": -1
+    }
+  },
+  {
+    "pk": 61,
+    "model": "go.stone",
+    "fields": {
+      "color": 1,
+      "user": 2,
+      "set_date": "2013-01-03T16:35:45.100Z",
+      "board": 1,
+      "col": -1,
+      "row": -1
+    }
+  },
+  {
+    "pk": 62,
+    "model": "go.stone",
+    "fields": {
+      "color": 1,
+      "user": 2,
+      "set_date": "2013-01-03T16:35:45.121Z",
+      "board": 1,
+      "col": -1,
+      "row": -1
+    }
+  },
+  {
+    "pk": 63,
+    "model": "go.stone",
+    "fields": {
+      "color": 1,
+      "user": 2,
+      "set_date": "2013-01-03T16:35:45.160Z",
+      "board": 1,
+      "col": -1,
+      "row": -1
+    }
+  },
+  {
+    "pk": 64,
+    "model": "go.stone",
+    "fields": {
+      "color": 1,
+      "user": 2,
+      "set_date": "2013-01-03T16:35:45.202Z",
+      "board": 1,
+      "col": -1,
+      "row": -1
+    }
+  },
+  {
+    "pk": 65,
+    "model": "go.stone",
+    "fields": {
+      "color": 1,
+      "user": 2,
+      "set_date": "2013-01-03T16:35:45.235Z",
+      "board": 1,
+      "col": -1,
+      "row": -1
+    }
+  },
+  {
+    "pk": 66,
+    "model": "go.stone",
+    "fields": {
+      "color": 1,
+      "user": 2,
+      "set_date": "2013-01-03T16:35:45.276Z",
+      "board": 1,
+      "col": -1,
+      "row": -1
+    }
+  },
+  {
+    "pk": 67,
+    "model": "go.stone",
+    "fields": {
+      "color": 1,
+      "user": 2,
+      "set_date": "2013-01-03T16:35:45.324Z",
+      "board": 1,
+      "col": -1,
+      "row": -1
+    }
+  },
+  {
+    "pk": 68,
+    "model": "go.stone",
+    "fields": {
+      "color": 1,
+      "user": 2,
+      "set_date": "2013-01-03T16:35:45.356Z",
+      "board": 1,
+      "col": -1,
+      "row": -1
+    }
+  },
+  {
+    "pk": 69,
+    "model": "go.stone",
+    "fields": {
+      "color": 1,
+      "user": 2,
+      "set_date": "2013-01-03T16:35:45.382Z",
+      "board": 1,
+      "col": -1,
+      "row": -1
+    }
+  },
+  {
+    "pk": 70,
+    "model": "go.stone",
+    "fields": {
+      "color": 1,
+      "user": 2,
+      "set_date": "2013-01-03T16:35:45.412Z",
+      "board": 1,
+      "col": -1,
+      "row": -1
+    }
+  },
+  {
+    "pk": 71,
+    "model": "go.stone",
+    "fields": {
+      "color": 1,
+      "user": 2,
+      "set_date": "2013-01-03T16:35:45.428Z",
+      "board": 1,
+      "col": -1,
+      "row": -1
+    }
+  },
+  {
+    "pk": 72,
+    "model": "go.stone",
+    "fields": {
+      "color": 1,
+      "user": 2,
+      "set_date": "2013-01-03T16:35:45.447Z",
+      "board": 1,
+      "col": -1,
+      "row": -1
+    }
+  },
+  {
+    "pk": 73,
+    "model": "go.stone",
+    "fields": {
+      "color": 1,
+      "user": 2,
+      "set_date": "2013-01-03T16:35:45.465Z",
+      "board": 1,
+      "col": -1,
+      "row": -1
+    }
+  },
+  {
+    "pk": 74,
+    "model": "go.stone",
+    "fields": {
+      "color": 1,
+      "user": 2,
+      "set_date": "2013-01-03T16:35:45.481Z",
+      "board": 1,
+      "col": -1,
+      "row": -1
+    }
+  },
+  {
+    "pk": 75,
+    "model": "go.stone",
+    "fields": {
+      "color": 1,
+      "user": 2,
+      "set_date": "2013-01-03T16:35:45.498Z",
+      "board": 1,
+      "col": -1,
+      "row": -1
+    }
+  },
+  {
+    "pk": 76,
+    "model": "go.stone",
+    "fields": {
+      "color": 1,
+      "user": 2,
+      "set_date": "2013-01-03T16:35:45.515Z",
+      "board": 1,
+      "col": -1,
+      "row": -1
+    }
+  },
+  {
+    "pk": 77,
+    "model": "go.stone",
+    "fields": {
+      "color": 1,
+      "user": 2,
+      "set_date": "2013-01-03T16:35:45.539Z",
+      "board": 1,
+      "col": -1,
+      "row": -1
+    }
+  },
+  {
+    "pk": 78,
+    "model": "go.stone",
+    "fields": {
+      "color": 1,
+      "user": 2,
+      "set_date": "2013-01-03T16:35:45.582Z",
+      "board": 1,
+      "col": -1,
+      "row": -1
+    }
+  },
+  {
+    "pk": 79,
+    "model": "go.stone",
+    "fields": {
+      "color": 1,
+      "user": 2,
+      "set_date": "2013-01-03T16:35:45.598Z",
+      "board": 1,
+      "col": -1,
+      "row": -1
+    }
+  },
+  {
+    "pk": 80,
+    "model": "go.stone",
+    "fields": {
+      "color": 1,
+      "user": 2,
+      "set_date": "2013-01-03T16:35:45.616Z",
+      "board": 1,
+      "col": -1,
+      "row": -1
+    }
+  },
+  {
+    "pk": 81,
+    "model": "go.stone",
+    "fields": {
+      "color": 1,
+      "user": 2,
+      "set_date": "2013-01-03T16:35:45.635Z",
+      "board": 1,
+      "col": -1,
+      "row": -1
+    }
+  }
+]

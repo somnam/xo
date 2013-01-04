@@ -4,10 +4,10 @@ from threading import Event
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render, Http404
 from django.http import HttpResponse 
-from django.core import serializers
 from common.models import Game
 from go.forms import GameCreateForm, GameEditForm
 from go.models import Board, Stone, STONE_COLORS
+import go.utils
 
 _event = Event()
 
@@ -71,24 +71,10 @@ def game_join(request, game_id):
     game.users.add(request.user.id)
     game.save()
 
-    # Get game board
-    board = game.board
-
     # Add stones for second player
-    board.add_stones(request.user.id, STONE_COLORS['white'])
+    game.board.add_stones(request.user.id, STONE_COLORS['white'])
 
-    # Get all stones placed on current Board
-    stones = board.get_stones_by_row_and_col()
-
-    # Get stone color for current user
-    stone_color = board.get_stone_color(request.user.id)
-
-    # Render board
-    return render(request, 'go/test.html', {
-        'board'       : board,
-        'stones'      : stones,
-        'stone_color' : stone_color,
-    })
+    return game_play(request, game_id)
 
 @login_required
 def game_play(request, game_id):
@@ -99,22 +85,23 @@ def game_play(request, game_id):
     stones = board.get_stones_by_row_and_col()
 
     # Get stone color for current user
-    stone_color = board.get_stone_color(request.user.id)
+    stone_color = board.get_user_stone_color(request.user.id)
+
+    # Get stone color for next move
+    next_move_color = board.get_next_move_color()
 
     # Render board
     return render(request, 'go/test.html', {
-        'board'       : board,
-        'stones'      : stones,
-        'stone_color' : stone_color,
+        'board'           : board,
+        'stones'          : stones,
+        'stone_color'     : stone_color,
+        'next_move_color' : next_move_color,
     })
 
 @login_required
 def game_update(request, game_id):
 
     if request.method == "POST":
-        # Get game board
-        board = Board.objects.get(pk=game_id)
-
         # Ajax sends stone coords when we need to update Board state
         has_stone = (
             request.POST.has_key('row') and
@@ -125,12 +112,8 @@ def game_update(request, game_id):
 
         # Update Board state after current players move
         if has_stone:
-            # Get first stone that isn't placed on Board
-            stone = board.get_first_not_placed_stone(request.user.id)
-            
             # Update stone state with users move
-            stone.row,stone.col = request.POST['row'], request.POST['col']
-            stone.save()
+            go.utils.stone_update(request, game_id)
 
             # All waiting listeners are awakened
             _event.set()
@@ -145,13 +128,10 @@ def game_update(request, game_id):
             # Block listeners until another thread calls 'set'
             _event.wait()
 
-            # Refresh board via ajax
-            serialized_stones = serializers.serialize(
-                'json',
-                board.get_placed_stones(),
-                fields=('row', 'col', 'color')
+            # Get updated board data in serialized form
+            response = HttpResponse(
+                go.utils.get_board_update_json(game_id)
             )
-            response = HttpResponse(serialized_stones)
 
         return response
     else:

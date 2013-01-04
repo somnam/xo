@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from common.models import Game
+from go.validators import StoneValidator
 
 # Create your models here.
 
@@ -71,6 +72,28 @@ class Board(models.Model):
         """Get all stones placed on given board."""
         return self.stone_set.exclude(row=-1, col=-1)
 
+    def get_latest_placed_stone_color_code(self):
+        """Get color code of last placed stone."""
+
+        placed_stones = self.get_placed_stones()
+
+        color_code = None
+        if placed_stones.count():
+            color_code = placed_stones.latest().color
+
+        return color_code
+
+    def get_next_move_color(self):
+        """Get color code for next board move."""
+        latest_placed_color = self.get_latest_placed_stone_color_code()
+
+        # By default set 'black' as next move color
+        next_move_color_code = STONE_COLORS['black']
+        if not latest_placed_color is None:
+            next_move_color_code = 0 if latest_placed_color else 1
+
+        return DECODED_COLOR[next_move_color_code]
+
     def get_stones_by_row_and_col(self):
         """Map stones placed on board by row and column."""
 
@@ -86,14 +109,14 @@ class Board(models.Model):
 
         return placed_stones
 
-    def get_stone_color_code(self, user_id):
+    def get_user_stone_color_code(self, user_id):
         """Get color code of stones for given user."""
         user    = User.objects.get(pk=user_id)
         stone   = user.stone_set.filter(board_id = self.game_id)[0]
         return stone.color
 
-    def get_stone_color(self, user_id):
-        return DECODED_COLOR[self.get_stone_color_code(user_id)]
+    def get_user_stone_color(self, user_id):
+        return DECODED_COLOR[self.get_user_stone_color_code(user_id)]
 
     def get_first_not_placed_stone(self, user_id):
         """Get first stone that is not placed on Board."""
@@ -110,18 +133,26 @@ class Board(models.Model):
 
         # Add stones to users set if all were placed on board
         if not has_non_placed_stones:
-            self.add_stones(user_id, self.get_stone_color_code())
+            self.add_stones(user_id, self.get_user_stone_color_code())
 
         # Get first non-placed stone
         return user.stone_set.filter(**query_params)[0]
 
 # Stone
 class Stone(models.Model):
-    board   = models.ForeignKey(Board)
-    user    = models.ForeignKey(User)
-    row     = models.SmallIntegerField(default=-1)
-    col     = models.SmallIntegerField(default=-1)
-    color   = models.SmallIntegerField()
+    board    = models.ForeignKey(Board)
+    user     = models.ForeignKey(User)
+    row      = models.SmallIntegerField(default=-1)
+    col      = models.SmallIntegerField(default=-1)
+    color    = models.SmallIntegerField()
+    set_date = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        # Used for fetching latest created stone
+        get_latest_by = 'set_date'
     
+    def clean(self):
+        StoneValidator(self).clean()
+
     def get_color(self):
         return DECODED_COLOR[self.color]

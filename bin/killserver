@@ -1,0 +1,2 @@
+#!/bin/bash
+pgrep -U $UID -f runserver | xargs kill
