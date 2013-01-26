@@ -14,6 +14,8 @@ function getUpdateUrl() {
 $(".cell").click(function() {
     // Get cell coordinates from id
     var coords = this.id.replace("_cell", "").split("-");
+    // Get selected action type
+    var action = $('input[name="action"]:radio:checked').val();
 
     $.ajax({
         type        : "POST",
@@ -21,8 +23,9 @@ $(".cell").click(function() {
         dataType    : "json",
         beforeSend  : addCSRFToken,
         data        : {
-            'row' : coords[0],
-            'col' : coords[1],
+            'row'    : coords[0],
+            'col'    : coords[1],
+            'action' : action,
         },
     });
 });

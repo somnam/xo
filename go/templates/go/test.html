@@ -14,24 +14,33 @@
 
 
 {% block content %}
-<div id="{{ board.game_id }}_board" class="board size-{{ board.size }}">
-  {# Render top row #}
-  {% include 'go/includes/board_row_top.html' %}
+<div class="board-wrapper">
+  <div id="{{ board.game_id }}_board" class="board size-{{ board.size }}">
+    {# Render top row #}
+    {% include 'go/includes/board_row_top.html' %}
 
-  {# Render center rows #}
-  {% for row in board.rows|add:"-1"|get_range:1 %}
-  {% include 'go/includes/board_row_center.html' %}
-  {% endfor %}
+    {# Render center rows #}
+    {% for row in board.rows|add:"-1"|get_range:1 %}
+    {% include 'go/includes/board_row_center.html' %}
+    {% endfor %}
 
-  {# render bottom row #}
-  {% include 'go/includes/board_row_bottom.html' %}
+    {# render bottom row #}
+    {% include 'go/includes/board_row_bottom.html' %}
+  </div>
 </div>
-<div>
-  Color: {{ stone_color }}
-</div>
-<div>
-  Next move: 
-  <span id="{{ board.game_id }}_next_move_color">{{ next_move_color }}</span>
+<div id="{{ board.game_id }}_controls" class="controls">
+  <div>
+    Color: {{ stone_color }}
+  </div>
+  <div>
+    Next move: 
+    <span id="{{ board.game_id }}_next_move_color">{{ next_move_color }}</span>
+  </div>
+  <div>
+    Action:<br/>
+    <input type="radio" name="action" value="add" checked="checked">Add<br/>
+    <input type="radio" name="action" value="del">Remove
+  </div>
 </div>
 
 {% endblock %}

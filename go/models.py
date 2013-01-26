@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 from common.models import Game
-from go.validators import StoneValidator
 
 # Create your models here.
 
@@ -151,9 +150,6 @@ class Stone(models.Model):
     class Meta:
         # Used for fetching latest created stone
         get_latest_by = 'set_date'
-    
-    def clean(self):
-        StoneValidator(self).clean()
 
     def get_color(self):
         return DECODED_COLOR[self.color]

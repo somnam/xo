@@ -3,6 +3,7 @@ from django.utils import simplejson
 from common.models import Game
 from go.models import Board
 import go.utils
+from mock import Mock
 
 class UtilTest(TestCase):
     # Load fixtures
@@ -58,3 +59,118 @@ class UtilTest(TestCase):
         result = go.utils.get_board_update_json(1)
 
         self.assertEqual(result, expect)
+
+    def test_StoneUpdate_AddInvalidStone_AddsStone(self):
+
+        # Mock request
+        request = Mock(); 
+        request.user.id = 1
+        request.POST    = { 'row': 0, 'col': 1 }
+
+        # Get game board
+        game_id = 1
+        board   = Board.objects.get(pk=game_id)
+
+        # Store count of placed stones
+        latest_stones_count = board.get_placed_stones().count()
+
+        # Add new stone to board
+        go.utils.stone_update(request, game_id)
+
+        # Compare stones count
+        self.assertEqual(
+            board.get_placed_stones().count(),
+            latest_stones_count
+        )
+
+    def test_StoneUpdate_AddValidStone_AddsStone(self):
+
+        # Mock request
+        request = Mock(); 
+        request.user.id = 1
+        request.POST    = { 'row': 0, 'col': 2 }
+
+        # Get game board
+        game_id = 1
+        board   = Board.objects.get(pk=game_id)
+
+        # Store count of placed stones
+        latest_stones_count = board.get_placed_stones().count()
+
+        # Add new stone to board
+        go.utils.stone_update(request, game_id)
+
+        # Compare stones count
+        self.assertEqual(
+            board.get_placed_stones().count(),
+            (latest_stones_count+1)
+        )
+
+    def test_StoneUpdate_DeleteNotExistingStone_Passes(self):
+
+        # Mock request
+        request = Mock(); 
+        request.user.id = 1
+        request.POST    = { 'row': 0, 'col': 2, 'action': 'del' }
+
+        # Get game board
+        game_id = 1
+        board   = Board.objects.get(pk=game_id)
+
+        # Store count of placed stones
+        latest_stones_count = board.get_placed_stones().count()
+
+        # Remove stone from board
+        go.utils.stone_update(request, game_id)
+
+        # Compare stones count
+        self.assertEqual(
+            board.get_placed_stones().count(),
+            latest_stones_count
+        )
+
+    def test_StoneUpdate_DeleteExistingStone_DeletesStone(self):
+
+        # Mock request
+        request = Mock(); 
+        request.user.id = 2
+        request.POST    = { 'row': 1, 'col': 1, 'action': 'del' }
+
+        # Get game board
+        game_id = 1
+        board   = Board.objects.get(pk=game_id)
+
+        # Store count of placed stones
+        latest_stones_count = board.get_placed_stones().count()
+
+        # Remove stone from board
+        go.utils.stone_update(request, game_id)
+
+        # Compare stones count
+        self.assertEqual(
+            board.get_placed_stones().count(),
+            (latest_stones_count - 1)
+        )
+
+    def test_StoneUpdate_DeleteInvalidStone_FormSaveFails(self):
+
+        # Mock request
+        request = Mock(); 
+        request.user.id = 1
+        request.POST    = { 'row': 1, 'col': 1, 'action': 'del' }
+
+        # Get game board
+        game_id = 1
+        board   = Board.objects.get(pk=game_id)
+
+        # Store count of placed stones
+        latest_stones_count = board.get_placed_stones().count()
+
+        # Remove stone from board
+        go.utils.stone_update(request, game_id)
+
+        # Compare stones count
+        self.assertEqual(
+            board.get_placed_stones().count(),
+            latest_stones_count
+        )

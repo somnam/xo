@@ -149,11 +149,3 @@ class StoneTest(TestCase):
         self.assertIsNone(stone.full_clean())
         stone.save()
 
-    def test_AddStone_RaisesException(self):
-        "Creating stone instance"
-        
-        # Stone is placed on board
-        stone = Stone(board_id=1, user_id=1, row=0, col=1, color=0)
-        with self.assertRaisesRegexp(ValidationError, 'ERR_STONE_001'):
-            stone.full_clean()
-

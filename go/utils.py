@@ -1,28 +1,55 @@
-from django.core.exceptions import ValidationError
+from django.core.exceptions import ObjectDoesNotExist
 from django.core import serializers
+from django.forms.models import model_to_dict
 from django.utils import simplejson
 from go.models import Board
+from go.forms import StoneCreateForm, StoneDeleteForm
 
 def stone_update(request, game_id):
     """Update stone state with users move."""
 
+    # Get user action performed on stone (by default assume 'add')
+    action = 'add'
+    if request.POST.has_key('action'):
+        action = request.POST['action']
+
     # Get game board
     board = Board.objects.get(pk=game_id)
 
-    # Get first stone that isn't placed on Board
-    stone = board.get_first_not_placed_stone(request.user.id)
-
-    # Get users move coordinates
-    stone.row,stone.col = request.POST['row'],request.POST['col']
+    # 'add' - user adds stone to board
+    # 'del' - user removes stone from board
+    form,stone = None,None
+    if action == 'add':
+        # Get first stone that isn't placed on Board
+        stone = board.get_first_not_placed_stone(request.user.id)
+        # Update stone with users move coordinates
+        stone.row,stone.col = request.POST['row'],request.POST['col']
+        # Create add form
+        form = StoneCreateForm(
+            request = request,
+            data    = model_to_dict(stone),
+        )
+    elif action == 'del':
+        try:
+            # Get stone by user coordinates
+            stone = board.stone_set.get(
+                row = request.POST['row'],
+                col = request.POST['col']
+            )
+        except ObjectDoesNotExist:
+            pass
+        else:
+            # Set stone coordinates to -1, -1
+            stone.row,stone.col = -1,-1
+            # Create delete from
+            form = StoneDeleteForm(
+                request = request,
+                data    = model_to_dict(stone),
+            )
 
     # Validate stone
-    try:
-        stone.full_clean()
-    # Validation failed - don't update
-    except ValidationError as e:
-        pass
-    # Move is correct - update stone state
-    else:
+    if form and form.is_valid():
+        # Update stone state
         stone.save()
 
 def get_board_update_json(game_id):

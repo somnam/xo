@@ -1,3 +1,13 @@
+#content {
+    margin: 75px auto;
+    max-width: 700px;
+}
+
+.board-wrapper {
+    width: 550px;
+    float: left;
+}
+
 .board {
     background: url('../images/wood.jpg');
     margin: 0 auto;
@@ -15,13 +25,17 @@
 }
 
 .size-19x19 {
-    max-width: 700px;
     /**
     width: 1000px;
     height: 1000px;
     **/
     width: 500px;
     height: 500px;
+}
+
+div.controls {
+    float: right;
+    width: 150px;
 }
 
 div.cell {
