@@ -40,7 +40,7 @@ class Board(models.Model):
             self.size.split('x')
         )
 
-    def add_stones(self, user_id, color):
+    def add_stones(self, user, color):
         """Append stones of given color to given user."""
 
         # Get parameters for stones
@@ -63,7 +63,7 @@ class Board(models.Model):
         if can_add_stones:
             # Create Stone instances
             for _ in range(0, stones_count):
-                self.stone_set.create(user_id=user_id, color=color)
+                self.stone_set.create(user_id=user.id, color=color)
             # Save changes
             self.save()
 
@@ -109,19 +109,16 @@ class Board(models.Model):
 
         return placed_stones
 
-    def get_user_stone_color_code(self, user_id):
+    def get_user_stone_color_code(self, user):
         """Get color code of stones for given user."""
-        user    = User.objects.get(pk=user_id)
-        stone   = user.stone_set.filter(board_id = self.game_id)[0]
+        stone = user.stone_set.filter(board_id = self.game_id)[0]
         return stone.color
 
-    def get_user_stone_color(self, user_id):
-        return DECODED_COLOR[self.get_user_stone_color_code(user_id)]
+    def get_user_stone_color(self, user):
+        return DECODED_COLOR[self.get_user_stone_color_code(user)]
 
-    def get_first_not_placed_stone(self, user_id):
+    def get_first_not_placed_stone(self, user):
         """Get first stone that is not placed on Board."""
-
-        user = User.objects.get(pk=user_id)
 
         # Check if there are any non-placed stones left
         query_params = {
@@ -133,7 +130,7 @@ class Board(models.Model):
 
         # Add stones to users set if all were placed on board
         if not has_non_placed_stones:
-            self.add_stones(user_id, self.get_user_stone_color_code())
+            self.add_stones(user, self.get_user_stone_color_code(user))
 
         # Get first non-placed stone
         return user.stone_set.filter(**query_params)[0]

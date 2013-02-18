@@ -72,7 +72,7 @@ def game_join(request, game_id):
     game.save()
 
     # Add stones for second player
-    game.board.add_stones(request.user.id, STONE_COLORS['white'])
+    game.board.add_stones(request.user, STONE_COLORS['white'])
 
     return game_play(request, game_id)
 
@@ -85,7 +85,7 @@ def game_play(request, game_id):
     stones = board.get_stones_by_row_and_col()
 
     # Get stone color for current user
-    stone_color = board.get_user_stone_color(request.user.id)
+    stone_color = board.get_user_stone_color(request.user)
 
     # Get stone color for next move
     next_move_color = board.get_next_move_color()

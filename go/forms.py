@@ -30,7 +30,7 @@ class GameCreateForm(forms.Form):
 
         # Create black Stone instances for first player.
         # Second player will have white stones.
-        board.add_stones(self.user.id, STONE_COLORS['black'])
+        board.add_stones(self.user, STONE_COLORS['black'])
 
         return game
 
@@ -77,7 +77,7 @@ class StoneCreateForm(forms.Form):
         board               = cleaned_data['board']
         latest_placed_color = board.get_latest_placed_stone_color_code()
         user_color          = board.get_user_stone_color_code(
-            cleaned_data['user'].id
+            cleaned_data['user']
         )
 
         if latest_placed_color == user_color:
@@ -98,7 +98,7 @@ class StoneDeleteForm(StoneCreateForm):
         board               = cleaned_data['board']
         latest_placed_color = board.get_latest_placed_stone_color_code()
         user_color          = board.get_user_stone_color_code(
-            self.request.user.id
+            self.request.user
         )
 
         # User can remove stone only:

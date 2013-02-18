@@ -21,7 +21,7 @@ def stone_update(request, game_id):
     form,stone = None,None
     if action == 'add':
         # Get first stone that isn't placed on Board
-        stone = board.get_first_not_placed_stone(request.user.id)
+        stone = board.get_first_not_placed_stone(request.user)
         # Update stone with users move coordinates
         stone.row,stone.col = request.POST['row'],request.POST['col']
         # Create add form

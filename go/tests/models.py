@@ -53,7 +53,7 @@ class BoardTest(TestCase):
         board = Board(game_id=1, size="9x9")
         board.save()
         user = User.objects.get(id=1)
-        board.add_stones(user.id, STONE_COLORS['black'])
+        board.add_stones(user, STONE_COLORS['black'])
 
         # Check stones count
         self.assertEqual(board.stone_set.count(), 41)
@@ -74,8 +74,8 @@ class BoardTest(TestCase):
         board = Board(game_id=1, size="9x9")
         board.save()
         user = User.objects.get(id=1)
-        board.add_stones(user.id, STONE_COLORS['black'])
-        board.add_stones(user.id, STONE_COLORS['black'])
+        board.add_stones(user, STONE_COLORS['black'])
+        board.add_stones(user, STONE_COLORS['black'])
 
         # Check stones count
         self.assertEqual(board.stone_set.count(), 41)
@@ -87,9 +87,9 @@ class BoardTest(TestCase):
         board = Board(game_id=1, size="9x9")
         board.save()
         user = User.objects.get(id=1)
-        board.add_stones(user.id, STONE_COLORS['black'])
+        board.add_stones(user, STONE_COLORS['black'])
         user2 = User.objects.get(id=2)
-        board.add_stones(user2.id, STONE_COLORS['white'])
+        board.add_stones(user2, STONE_COLORS['white'])
 
         # Check stones count
         self.assertEqual(board.stone_set.count(), 81)
@@ -110,12 +110,12 @@ class BoardTest(TestCase):
         board = Board(game_id=1, size="9x9")
         board.save()
         user = User.objects.get(id=1)
-        board.add_stones(user.id, STONE_COLORS['black'])
+        board.add_stones(user, STONE_COLORS['black'])
         user2 = User.objects.get(id=2)
-        board.add_stones(user2.id, STONE_COLORS['white'])
+        board.add_stones(user2, STONE_COLORS['white'])
 
         # Add white stones for second time
-        board.add_stones(user2.id, STONE_COLORS['white'])
+        board.add_stones(user2, STONE_COLORS['white'])
 
         # Check stones count
         self.assertEqual(board.stone_set.count(), 81)

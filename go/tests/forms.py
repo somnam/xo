@@ -1,6 +1,7 @@
 from django.test import TestCase
 from django.core.exceptions import ValidationError
 from django.forms.models import model_to_dict
+from django.contrib.auth.models import User
 from go.models import Stone
 from go.forms import StoneCreateForm, StoneDeleteForm
 from mock import Mock
@@ -77,7 +78,7 @@ class StoneDeleteFormTest(TestCase):
 
         # Mock request
         request         = Mock()
-        request.user.id = 1
+        request.user    = User.objects.get(pk=1)
 
         # Remove black stone
         stone = Stone.objects.get(row=0, col=0, color=0)
@@ -93,7 +94,7 @@ class StoneDeleteFormTest(TestCase):
 
         # Mock request
         request         = Mock()
-        request.user.id = 1
+        request.user    = User.objects.get(pk=1)
 
         # Remove white stone
         stone = Stone.objects.get(row=1, col=0, color=1)
@@ -110,7 +111,7 @@ class StoneDeleteFormTest(TestCase):
 
         # Mock request
         request         = Mock()
-        request.user.id = 2
+        request.user    = User.objects.get(pk=2)
 
         # Remove black stone by user with white stones
         stone = Stone.objects.get(row=0, col=0, color=0)

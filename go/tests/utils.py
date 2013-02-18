@@ -1,5 +1,6 @@
 from django.test import TestCase
 from django.utils import simplejson
+from django.contrib.auth.models import User
 from common.models import Game
 from go.models import Board
 import go.utils
@@ -63,9 +64,9 @@ class UtilTest(TestCase):
     def test_StoneUpdate_AddInvalidStone_AddsStone(self):
 
         # Mock request
-        request = Mock(); 
-        request.user.id = 1
-        request.POST    = { 'row': 0, 'col': 1 }
+        request      = Mock(); 
+        request.user = User.objects.get(pk=1)
+        request.POST = { 'row': 0, 'col': 1 }
 
         # Get game board
         game_id = 1
@@ -86,9 +87,9 @@ class UtilTest(TestCase):
     def test_StoneUpdate_AddValidStone_AddsStone(self):
 
         # Mock request
-        request = Mock(); 
-        request.user.id = 1
-        request.POST    = { 'row': 0, 'col': 2 }
+        request      = Mock(); 
+        request.user = User.objects.get(pk=1)
+        request.POST = { 'row': 0, 'col': 2 }
 
         # Get game board
         game_id = 1
@@ -109,9 +110,9 @@ class UtilTest(TestCase):
     def test_StoneUpdate_DeleteNotExistingStone_Passes(self):
 
         # Mock request
-        request = Mock(); 
-        request.user.id = 1
-        request.POST    = { 'row': 0, 'col': 2, 'action': 'del' }
+        request      = Mock(); 
+        request.user = User.objects.get(pk=1)
+        request.POST = { 'row': 0, 'col': 2, 'action': 'del' }
 
         # Get game board
         game_id = 1
@@ -132,9 +133,9 @@ class UtilTest(TestCase):
     def test_StoneUpdate_DeleteExistingStone_DeletesStone(self):
 
         # Mock request
-        request = Mock(); 
-        request.user.id = 2
-        request.POST    = { 'row': 1, 'col': 1, 'action': 'del' }
+        request      = Mock(); 
+        request.user = User.objects.get(pk=2)
+        request.POST = { 'row': 1, 'col': 1, 'action': 'del' }
 
         # Get game board
         game_id = 1
@@ -155,9 +156,9 @@ class UtilTest(TestCase):
     def test_StoneUpdate_DeleteInvalidStone_FormSaveFails(self):
 
         # Mock request
-        request = Mock(); 
-        request.user.id = 1
-        request.POST    = { 'row': 1, 'col': 1, 'action': 'del' }
+        request      = Mock(); 
+        request.user = User.objects.get(pk=1)
+        request.POST = { 'row': 1, 'col': 1, 'action': 'del' }
 
         # Get game board
         game_id = 1
