@@ -28,19 +28,37 @@
     {% include 'go/includes/board_row_bottom.html' %}
   </div>
 </div>
-<div id="{{ board.game_id }}_controls" class="controls">
+<div class="controls">
   <div>
     Color: {{ stone_color }}
   </div>
   <div>
     Next move: 
-    <span id="{{ board.game_id }}_next_move_color">{{ next_move_color }}</span>
+    <span id="next_move_color">{{ next_move_color }}</span>
   </div>
   <div>
     Action:<br/>
     <input type="radio" name="action" value="add" checked="checked">Add<br/>
     <input type="radio" name="action" value="del">Remove
   </div>
+</div>
+
+<div class="chat">
+  <div id="message-box">
+    {% for message in messages %}
+    <div class="message-wrapper">
+      <span class="timestamp">{{ message.timestamp|date:"H:i:s" }}</span>
+      {% if message.type == 'm' %}
+      <span class="author">{{ message.author }}</span>:
+      {% endif %}
+      <span class="message {{ message.type }}">{{ message }}</span>
+    </div>
+    {% endfor %}
+  </div>
+  <form id="chat-form">
+    <input name="chat-message" type="text" />
+    <input type="submit" value="Say" />
+  </form>
 </div>
 
 {% endblock %}

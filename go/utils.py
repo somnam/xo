@@ -2,8 +2,11 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.core import serializers
 from django.forms.models import model_to_dict
 from django.utils import simplejson
+from django.utils.timezone import get_current_timezone
+from django.contrib.auth.models import User
 from go.models import Board
 from go.forms import StoneCreateForm, StoneDeleteForm
+from common.models import Chat, Message
 
 def stone_update(request, game_id):
     """Update stone state with users move."""
@@ -74,3 +77,41 @@ def get_board_update_json(game_id):
         'next_move_color'   : next_move_color,
     })
 
+def chat_update(request, game_id):
+    chat = Chat.objects.get(pk=game_id)
+
+    # Update chat state with users message
+    message = Message(
+        chat=chat,
+        author=request.user,
+        message=request.POST['message'],
+    )
+    message.save()
+
+def get_chat_update_json(game_id):
+    chat = Chat.objects.get(pk=game_id)
+
+    # Get updated chat data in serialized form
+    chat_messages = serializers.serialize(
+        'python',
+        chat.message_set.all(),
+        fields=('author', 'type', 'message', 'timestamp')
+    )
+
+    for message in chat_messages:
+        fields = message['fields']
+
+        # Append author name to serialized data
+        user_id = fields['author']
+        if user_id:
+            user    = User.objects.get(pk=user_id)
+            message['fields']['author'] = user.username
+
+        # Get timestamp in current timezone
+        timestamp = fields['timestamp'].astimezone(tz=get_current_timezone())
+        # Append formated timestamp
+        message['fields']['timestamp'] = timestamp.strftime('%X')
+
+    return simplejson.dumps({
+        'chat_messages' : chat_messages,
+    })

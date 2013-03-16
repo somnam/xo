@@ -22,16 +22,14 @@
       <div class="header-content">
         <h1><a href="{% url auth.views.login %}">go</a></h1>
 
-        <div class="header-nav">
-          <ul>
-            {% if user.is_authenticated %}
-            {% block header-nav %}{% endblock %}
-            <li><a href="{% url django.contrib.auth.views.logout_then_login %}">logout</a></li>
-            {% else %}
-            <li><a href="{% url auth.views.register %}">register</a></li>
-            {% endif %}
-          </ul>
-        </div>
+        <ul class="header-nav">
+          {% if user.is_authenticated %}
+          {% block header-nav %}{% endblock %}
+          <li><a href="{% url django.contrib.auth.views.logout_then_login %}">logout</a></li>
+          {% else %}
+          <li><a href="{% url auth.views.register %}">register</a></li>
+          {% endif %}
+        </ul>
       </div>
     </div>
 

@@ -25,65 +25,45 @@
 }
 
 .size-19x19 {
-    /**
-    width: 1000px;
-    height: 1000px;
-    **/
     width: 500px;
     height: 500px;
 }
 
 div.controls {
-    float: right;
+    float: left;
     width: 150px;
 }
 
 div.cell {
-    /**
-    width: 50px;
-    height: 50px;
-    **/
     width: 25px;
     height: 25px;
     float: left;
 }
 
 .cell div {
-    /**
-    width: 24px;
-    height: 24px;
-    **/
     width: 12px;
     height: 12px;
     float: left;
 }
 
 div.border-left {
-    /**border-left: 2px solid #444;**/
     border-left: 1px solid #444;
 }
 
 div.border-top {
-    /**border-top: 2px solid #444;**/
     border-top: 1px solid #444;
 }
 
 div.border-right {
-    /**border-right: 2px solid #444;**/
     border-right: 1px solid #444;
 }
 
 div.border-bottom {
-    /**border-bottom: 2px solid #444;**/
     border-bottom: 1px solid #444;
 }
 
 div.stone {
     position: absolute;
-    /**
-    width: 45px;
-    height: 45px;
-    **/
     margin-top: 1px;
     margin-left: 1px;
     width: 23px;
@@ -104,4 +84,45 @@ div .black {
 
 div .block {
     display: block;
+}
+
+.chat {
+    margin-top: 50px;
+    float: left;
+    width: 90%;
+}
+
+.chat #message-box {
+    overflow: auto;
+    height: 150px;
+    border: 1px solid #777;
+    background-color: white;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
+
+.chat .message-wrapper {
+    margin: 2px 0;
+    /* HACK: avoid additional space between child span tags - parent. */
+    font-size: 0px;
+}
+
+/* HACK: avoid additional space between child span tags - children. */
+.chat .timestamp,
+.chat .author,
+.chat .message {
+    font-size: 16px;
+}
+
+.chat .author {
+    font-weight: bold;
+    margin-left: 5px;
+}
+
+.chat .message {
+    margin-left: 3px;
+}
+
+.chat #chat-form {
+    margin-top: 3px;
 }

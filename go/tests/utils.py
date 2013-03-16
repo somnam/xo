@@ -175,3 +175,54 @@ class UtilTest(TestCase):
             board.get_placed_stones().count(),
             latest_stones_count
         )
+
+    def test_GetChatUpdateJson_ChatWithMessages_ReturnsJson(self):
+        expect = simplejson.dumps({
+            'chat_messages': [
+                {
+                    'pk'        : 1,
+                    'model'     : 'common.message',
+                    'fields'    : {
+                        'timestamp'     : '21:22:55',
+                        'message'       : "User 'test1' has joined the chat.",
+                        'type'          : 'j',
+                        'author'        : 'test1',
+                    },
+                },
+                {
+                    'pk'        : 2,
+                    'model'     : 'common.message',
+                    'fields'    : {
+                        'timestamp'     : '23:06:40',
+                        'message'       : 'Twix',
+                        'type'          : 'm',
+                        'author'        : 'test1',
+                    },
+                },
+                {
+                    'pk'        : 3,
+                    'model'     : 'common.message',
+                    'fields'    : {
+                        'timestamp'     : '23:07:36',
+                        'message'       : 'Snickers',
+                        'type'          : 'm',
+                        'author'        : 'test1',
+                    },
+                },
+                {
+                    'pk'        : 4,
+                    'model'     : 'common.message',
+                    'fields'    : {
+                        'timestamp'     : '23:08:32',
+                        'message'       : 'Mars',
+                        'type'          : 'm',
+                        'author'        : 'test1',
+                    },
+                },
+            ],
+        })
+
+        result = go.utils.get_chat_update_json(1)
+
+        self.assertEqual(result, expect)
+

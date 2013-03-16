@@ -1,8 +1,8 @@
-from go.models import Board, BOARD_SIZES, STONE_COLORS
-from common.models import Game
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django import forms
+from go.models import Board, BOARD_SIZE_CHOICES, STONE_COLORS
+from common.models import Game, Chat
 
 class GameCreateForm(forms.Form):
     name = forms.CharField(
@@ -10,7 +10,7 @@ class GameCreateForm(forms.Form):
         label="Game name",
     )
     size = forms.ChoiceField(
-        choices=BOARD_SIZES,
+        choices=BOARD_SIZE_CHOICES,
         label="Board size"
     )
 
@@ -22,15 +22,24 @@ class GameCreateForm(forms.Form):
         # Create a new Game instance for current user
         game = Game(name=self.cleaned_data['name'])
         game.save()
+        # Add user to game
         game.users.add(self.user.id)
         game.save()
-        
+
         # Create a new Board instance and assign it to created game
         board = Board(game_id=game.id, size=self.cleaned_data['size'])
+        board.save()
 
         # Create black Stone instances for first player.
         # Second player will have white stones.
         board.add_stones(self.user, STONE_COLORS['black'])
+
+        # Add chat to game
+        chat = Chat(game_id=game.id)
+        chat.save()
+
+        # Add player join message
+        chat.join(self.user)
 
         return game
 

@@ -36,17 +36,13 @@ body {
     color: #fff;
 }
 
-.header-nav {
+.header-nav li {
     float: right;
-    margin-top: 10px;
-}
-
-.header-nav ul li {
     display: inline;
-    margin: 0 5px;
+    margin: 10px 5px 0 5px;
 }
 
-.header-nav ul li a {
+.header-nav li a {
     color: #fff;
     font-size: large;
     font-weight: normal;

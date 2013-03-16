@@ -23,5 +23,8 @@ urlpatterns = patterns(
 
     # Delete game
     url(r'^(?P<game_id>\d+)/delete/$', 'game_delete'),
+
+    # Send chat message
+    url(r'^(?P<game_id>\d+)/say/$', 'chat_say'),
 )
 

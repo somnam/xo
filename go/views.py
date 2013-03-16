@@ -4,12 +4,13 @@ from threading import Event
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render, Http404
 from django.http import HttpResponse 
-from common.models import Game
+from common.models import Game, Chat
 from go.forms import GameCreateForm, GameEditForm
 from go.models import Board, Stone, STONE_COLORS
 import go.utils
 
-_event = Event()
+go_event = Event()
+chat_event = Event()
 
 @login_required
 def game_list(request):
@@ -23,8 +24,9 @@ def game_create(request):
     if request.method == "POST":
         form = GameCreateForm(request.user, request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('go.views.game_list')
+            game = form.save()
+            # Redirect directly to game screen
+            return redirect('go.views.game_play', game_id=game.id)
     else:
         form = GameCreateForm(request.user)
 
@@ -74,6 +76,10 @@ def game_join(request, game_id):
     # Add stones for second player
     game.board.add_stones(request.user, STONE_COLORS['white'])
 
+    # Player join chat message
+    chat = Chat.objects.get(pk=game_id)
+    chat.join(request.user)
+
     return game_play(request, game_id)
 
 @login_required
@@ -90,12 +96,17 @@ def game_play(request, game_id):
     # Get stone color for next move
     next_move_color = board.get_next_move_color()
 
+    # Get player chat
+    chat = Chat.objects.get(pk=game_id)
+
     # Render board
     return render(request, 'go/test.html', {
         'board'           : board,
         'stones'          : stones,
         'stone_color'     : stone_color,
         'next_move_color' : next_move_color,
+        # Get chat messages
+        'messages'        : chat.message_set.all(),
     })
 
 @login_required
@@ -116,17 +127,17 @@ def game_update(request, game_id):
             go.utils.stone_update(request, game_id)
 
             # All waiting listeners are awakened
-            _event.set()
+            go_event.set()
 
             # Subsequent calls to 'wait' will block unitl 'set' is called
-            _event.clear()
+            go_event.clear()
 
             # Refresh board via ajax
             response = HttpResponse()
         # Update Board after other players move
         else:
             # Block listeners until another thread calls 'set'
-            _event.wait()
+            go_event.wait()
 
             # Get updated board data in serialized form
             response = HttpResponse(
@@ -137,3 +148,30 @@ def game_update(request, game_id):
     else:
         raise Http404
 
+@login_required
+def chat_say(request, game_id):
+    if request.method == "POST":
+        # Update chat state after current players message
+        response = None
+        if request.POST.has_key('message'):
+            go.utils.chat_update(request, game_id)
+
+            # All waiting listeners are awakened
+            go_event.set()
+
+            # Subsequent calls to 'wait' will block unitl 'set' is called
+            go_event.clear()
+
+            # Refresh board via ajax
+            response = HttpResponse()
+        else:
+            # Block listeners until another thread calls 'set'
+            go_event.wait()
+
+            response = HttpResponse(
+                go.utils.get_chat_update_json(game_id)
+            )
+
+        return response
+    else:
+        raise Http404

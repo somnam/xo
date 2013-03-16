@@ -9,5 +9,61 @@
         2
       ]
     }
+  },
+  {
+    "pk": 1,
+    "model": "common.chat",
+    "fields": {
+      "game": 1
+    }
+  },
+  {
+    "pk": 1,
+    "model": "common.chat",
+    "fields": {}
+  },
+  {
+    "pk": 1,
+    "model": "common.message",
+    "fields": {
+      "timestamp": "2013-02-27T20:22:55.501Z",
+      "message": "User 'test1' has joined the chat.",
+      "type": "j",
+      "chat": 1,
+      "author": 1
+    }
+  },
+  {
+    "pk": 2,
+    "model": "common.message",
+    "fields": {
+      "timestamp": "2013-02-27T22:06:40.008Z",
+      "message": "Twix",
+      "type": "m",
+      "chat": 1,
+      "author": 1
+    }
+  },
+  {
+    "pk": 3,
+    "model": "common.message",
+    "fields": {
+      "timestamp": "2013-02-27T22:07:36.953Z",
+      "message": "Snickers",
+      "type": "m",
+      "chat": 1,
+      "author": 1
+    }
+  },
+  {
+    "pk": 4,
+    "model": "common.message",
+    "fields": {
+      "timestamp": "2013-02-27T22:08:32.923Z",
+      "message": "Mars",
+      "type": "m",
+      "chat": 1,
+      "author": 1
+    }
   }
 ]

@@ -44,13 +44,6 @@
       <td>{{ game.board.size }}</td>
 
       <td>
-        {% if users.count < 2 %}
-          {# User exists in current game #}
-          {% if user in users %}
-          {% else %}
-          {% endif %}
-        {% endif %}
-
         {# User can manage current game #}
         {% if user in users %}
         <a href="{% url go.views.game_play game.id %}">play</a> &#124;
