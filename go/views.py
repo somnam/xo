@@ -100,7 +100,7 @@ def game_play(request, game_id):
     chat = Chat.objects.get(pk=game_id)
 
     # Render board
-    return render(request, 'go/test.html', {
+    return render(request, 'go/game_play.html', {
         'board'           : board,
         'stones'          : stones,
         'stone_color'     : stone_color,
