@@ -7,7 +7,7 @@
 {% block content %}
 
 <div class="game-create">
-  <form method="post" action="{% url go.views.game_create %}">
+  <form method="post" action="{% url "go.views.game_create" %}">
     {% csrf_token %}
 
     {% include "common/includes/form.html" %}

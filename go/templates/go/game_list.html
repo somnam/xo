@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block header-nav %}
-<li><a href="{% url go.views.game_create %}">add game</a></li>
+<li><a href="{% url "go.views.game_create" %}">add game</a></li>
 {% endblock %}
 
 {% block content %}
@@ -46,12 +46,12 @@
       <td>
         {# User can manage current game #}
         {% if user in users %}
-        <a href="{% url go.views.game_play game.id %}">play</a> &#124;
-        <a href="{% url go.views.game_edit game.id %}">edit</a> &#124;
-        <a href="{% url go.views.game_delete game.id %}">delete</a>
+        <a href="{% url "go.views.game_play" game.id %}">play</a> &#124;
+        <a href="{% url "go.views.game_edit" game.id %}">edit</a> &#124;
+        <a href="{% url "go.views.game_delete" game.id %}">delete</a>
         {# User can be added to game #}
         {% elif users.count < 2 %}
-        <a href="{% url go.views.game_join game.id %}">join</a>
+        <a href="{% url "go.views.game_join" game.id %}">join</a>
         {% endif %}
 
       </td>

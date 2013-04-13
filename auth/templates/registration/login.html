@@ -5,7 +5,7 @@
 {% block content %}
 
 <div class="auth">
-  <form method="post" action="{% url auth.views.login %}">
+  <form method="post" action="{% url "auth.views.login" %}">
     {% csrf_token %}
 
     {% include "common/includes/form.html" %}
