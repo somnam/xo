@@ -108,7 +108,7 @@ function addStone(stone) {
 // Submit chat message via Ajax
 $('.chat').submit(function () {
     // Get message box elem
-    var messageInput = $('input[name="chat-message"]');
+    var messageInput = $('#chat-message');
 
     // Send ajax request
     $.ajax({

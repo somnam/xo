@@ -126,3 +126,10 @@ div .block {
 .chat #chat-form {
     margin-top: 3px;
 }
+
+.chat #chat-message {
+    width: 100%;
+    max-width: 100%;
+    min-width: 100%;
+    display: block;
+}
