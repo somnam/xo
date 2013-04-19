@@ -75,6 +75,16 @@ class Board(models.Model):
         """Get all stones placed on given board."""
         return self.stone_set.exclude(row=-1, col=-1)
 
+    def get_latest_placed_stone(self):
+        """Get last placed stone."""
+
+        latest_placed_stone = None
+        placed_stones       = self.get_placed_stones()
+        if placed_stones.count():
+            latest_placed_stone = placed_stones.latest()
+
+        return latest_placed_stone
+
     def get_latest_placed_stone_color_code(self):
         """Get color code of last placed stone."""
 
@@ -109,7 +119,7 @@ class Board(models.Model):
         for stone in stones:
             if not placed_stones.has_key(stone.row):
                 placed_stones[stone.row] = {}
-            placed_stones[stone.row][stone.col] = stone.get_color()
+            placed_stones[stone.row][stone.col] = stone
 
         return placed_stones
 

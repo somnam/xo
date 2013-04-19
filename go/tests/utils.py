@@ -20,8 +20,9 @@ class UtilTest(TestCase):
         board.save()
 
         expect = simplejson.dumps({
-            'placed_stones'     : [],
-            'next_move_color'   : 'black',
+            'placed_stones'         : [],
+            'next_move_color'       : 'black',
+            'latest_placed_stone'   : None,
         })
 
         result = go.utils.get_board_update_json(game.id)
@@ -54,7 +55,12 @@ class UtilTest(TestCase):
                     'fields'    : { 'color': 1, 'col': 1, 'row': 0 },
                 },
             ],
-            'next_move_color'   : 'black',
+            'next_move_color'       : 'black',
+            'latest_placed_stone'   : {
+                'pk'            : 43, 
+                'model'         : 'go.stone', 
+                'fields'        : {'color': 1, 'col': 1, 'row': 0},
+            },
         })
 
         result = go.utils.get_board_update_json(1)

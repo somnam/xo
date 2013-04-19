@@ -63,18 +63,31 @@ def get_board_update_json(game_id):
 
     # First convert placed stones query to python struct, so it can be easily
     # serialized via simplejson
-    placed_stones = serializers.serialize(
+    serialize_fields  = ('row', 'col', 'color')
+    placed_stones     = board.get_placed_stones()
+    serialized_stones = serializers.serialize(
         'python',
-        board.get_placed_stones(),
-        fields=('row', 'col', 'color')
+        placed_stones,
+        fields=serialize_fields
     )
 
     # Get color of next move
     next_move_color = board.get_next_move_color()
 
+    # Get latest placed stone
+    latest_placed_stone = None
+    if placed_stones.count():
+        # Hackish serialization, but it works ;-)
+        latest_placed_stone = serializers.serialize(
+            'python',
+            (placed_stones.latest(),),
+            fields=serialize_fields
+        )[0]
+
     return simplejson.dumps({
-        'placed_stones'     : placed_stones,
-        'next_move_color'   : next_move_color,
+        'placed_stones'         : serialized_stones,
+        'next_move_color'       : next_move_color,
+        'latest_placed_stone'   : latest_placed_stone,
     })
 
 def chat_update(request, game_id):

@@ -64,8 +64,9 @@ $('.cell').click(function() {
 // Update board after second players move
 function updateBoard(response) {
     if (response) {
-        var stones          = response['placed_stones'],
-            next_move_color = response['next_move_color'];
+        var stones              = response['placed_stones'],
+            next_move_color     = response['next_move_color'];
+            latest_placed_stone = response['latest_placed_stone'];
 
         // Clear all current stones from board
         $('.stone').remove();
@@ -74,7 +75,7 @@ function updateBoard(response) {
         for (var i = 0, j = stones.length; i < j; i++) {
             var stone = stones[i];
             if (stone.hasOwnProperty('fields')) {
-                addStone(stone.fields);
+                addStone(stone.fields, latest_placed_stone.fields);
             }
         }
 
@@ -87,7 +88,7 @@ function updateBoard(response) {
 }
 
 // Draw stone on board
-function addStone(stone) {
+function addStone(stone, latest_placed_stone) {
     // Find cell for stone
     var cellId = stone.row + '-' + stone.col + '_cell';
     var cell   = document.getElementById(cellId);
@@ -102,6 +103,16 @@ function addStone(stone) {
         // Append stone to cell
         var $cell = $(cell);
         $cell.append(stoneDiv);
+
+        // Append latest placed stone
+        if (latest_placed_stone &&
+            stone.row === latest_placed_stone.row &&
+            stone.col === latest_placed_stone.col
+        ) {
+            var latestDiv       = document.createElement('div');
+            latestDiv.className = 'stone block latest';
+            $(stoneDiv).append(latestDiv);
+        }
     }
 }
 

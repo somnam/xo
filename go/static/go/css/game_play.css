@@ -71,7 +71,6 @@ div.stone {
     border-radius: 50%;
     -moz-border-radius: 50%;
     -webkit-border-radius: 50%;
-    display: none;
 }
 
 div .white {
@@ -84,6 +83,14 @@ div .black {
 
 div .block {
     display: block;
+}
+
+div .latest {
+    margin-top: 9px;
+    margin-left: 9px;
+    width: 5px;
+    height: 5px;
+    background-color: red;
 }
 
 .chat {

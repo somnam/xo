@@ -96,17 +96,21 @@ def game_play(request, game_id):
     # Get stone color for next move
     next_move_color = board.get_next_move_color()
 
+    # Get latest placed stone
+    latest_placed_stone = board.get_latest_placed_stone()
+
     # Get player chat
     chat = Chat.objects.get(pk=game_id)
 
     # Render board
     return render(request, 'go/game_play.html', {
-        'board'           : board,
-        'stones'          : stones,
-        'stone_color'     : stone_color,
-        'next_move_color' : next_move_color,
+        'board'                 : board,
+        'stones'                : stones,
+        'latest_placed_stone'   : latest_placed_stone,
+        'stone_color'           : stone_color,
+        'next_move_color'       : next_move_color,
         # Get chat messages
-        'messages'        : chat.message_set.all(),
+        'messages'              : chat.message_set.all(),
     })
 
 @login_required

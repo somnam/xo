@@ -2,6 +2,10 @@
 
 {% with stones|get_stone:cell_id as stone %}
   {% if stone %}
-  <div class="stone block {{ stone }}"></div>
+    <div class="stone block {{ stone.get_color }}">
+    {% if stone|is_latest_placed_stone:latest_placed_stone %}
+      <div class="stone block latest"></div>
+    {% endif %}
+    </div>
   {% endif %}
 {% endwith %}
