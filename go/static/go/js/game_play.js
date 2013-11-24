@@ -1,31 +1,23 @@
-$(document).ready(function() {
-    pollBoard();
-    pollChat();
+var socket = io.connect('http://localhost:4040/');
+
+// Subscribe to two channels.
+socket.on('connect', function() {
+    socket.emit('subscribe', 'go');
+    socket.emit('subscribe', 'chat');
+
+    scrollMessageBox();
 });
 
-function pollBoard() {
-    // Update board state after other players move
-    $.ajax({
-        type        : 'POST',
-        url         : getBoardUpdateUrl(),
-        dataType    : 'json',
-        beforeSend  : addCSRFToken,
-        success     : updateBoard,
-    });
-}
-
-function pollChat() {
-    // Update chat state after other players message
-    $.ajax({
-        type        : 'POST',
-        url         : getChatUpdateUrl(),
-        dataType    : 'json',
-        beforeSend  : addCSRFToken,
-        success     : updateChat,
-    });
-
-    scrollMessageBox(3000);
-}
+// Listen for 'message' event.
+socket.on('message', function (data) {
+    // Update board.
+    if (data.channel === 'go') {
+        updateBoard($.parseJSON(data.message));
+    // Update chat.
+    } else if (data.channel === 'chat') {
+        updateChat($.parseJSON(data.message));
+    }
+});
 
 // Get Board id from board div
 function getBoardId() {
@@ -83,8 +75,6 @@ function updateBoard(response) {
         var nextMoveSpan        = document.getElementById('next_move_color');
         nextMoveSpan.innerHTML  = response['next_move_color'];
     }
-
-    return setTimeout(pollBoard, 0);
 }
 
 // Draw stone on board
@@ -155,10 +145,7 @@ function updateChat(response) {
         }
 
         scrollMessageBox();
-
     }
-
-    return setTimeout(pollChat, 0);
 }
 
 function scrollMessageBox(scrollSpeed) {

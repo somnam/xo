@@ -9,9 +9,6 @@ from go.forms import GameCreateForm, GameEditForm
 from go.models import Board, Stone, STONE_COLORS
 import go.utils
 
-go_event = Event()
-chat_event = Event()
-
 @login_required
 def game_list(request):
 
@@ -68,17 +65,19 @@ def game_delete(request, game_id):
 @login_required
 def game_join(request, game_id):
 
-    # Add second player to game
+    # Check if user isn't already added to game.
     game = Game.objects.get(pk=game_id)
-    game.users.add(request.user.id)
-    game.save()
+    if not game.users.filter(pk=request.user.id):
+        # Add second player to game
+        game.users.add(request.user.id)
+        game.save()
 
-    # Add stones for second player
-    game.board.add_stones(request.user, STONE_COLORS['white'])
+        # Add stones for second player
+        game.board.add_stones(request.user, STONE_COLORS['white'])
 
-    # Player join chat message
-    chat = Chat.objects.get(pk=game_id)
-    chat.join(request.user)
+        # Player join chat message
+        chat = Chat.objects.get(pk=game_id)
+        chat.join(request.user)
 
     return game_play(request, game_id)
 
@@ -117,38 +116,21 @@ def game_play(request, game_id):
 def game_update(request, game_id):
 
     if request.method == "POST":
-        # Ajax sends stone coords when we need to update Board state
+        # Ajax sends stone coords when we need to update Board state.
         has_stone = (
             request.POST.has_key('row') and
             request.POST.has_key('col')
         )
 
-        response = None
-
-        # Update Board state after current players move
+        # Update Board state after current players move.
         if has_stone:
-            # Update stone state with users move
+            # Update stone state with users move.
             go.utils.stone_update(request, game_id)
 
-            # All waiting listeners are awakened
-            go_event.set()
+            # Emit redis message.
+            go.utils.emit_board_update(game_id, 'go')
 
-            # Subsequent calls to 'wait' will block unitl 'set' is called
-            go_event.clear()
-
-            # Refresh board via ajax
-            response = HttpResponse()
-        # Update Board after other players move
-        else:
-            # Block listeners until another thread calls 'set'
-            go_event.wait()
-
-            # Get updated board data in serialized form
-            response = HttpResponse(
-                go.utils.get_board_update_json(game_id)
-            )
-
-        return response
+        return HttpResponse()
     else:
         raise Http404
 
@@ -156,26 +138,13 @@ def game_update(request, game_id):
 def chat_say(request, game_id):
     if request.method == "POST":
         # Update chat state after current players message
-        response = None
         if request.POST.has_key('message'):
+            # Update chat state with users message.
             go.utils.chat_update(request, game_id)
 
-            # All waiting listeners are awakened
-            go_event.set()
+            # Emit redis message.
+            go.utils.emit_chat_update(game_id, 'chat')
 
-            # Subsequent calls to 'wait' will block unitl 'set' is called
-            go_event.clear()
-
-            # Refresh board via ajax
-            response = HttpResponse()
-        else:
-            # Block listeners until another thread calls 'set'
-            go_event.wait()
-
-            response = HttpResponse(
-                go.utils.get_chat_update_json(game_id)
-            )
-
-        return response
+        return HttpResponse()
     else:
         raise Http404

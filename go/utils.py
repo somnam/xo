@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 from go.models import Board
 from go.forms import StoneCreateForm, StoneDeleteForm
 from common.models import Chat, Message
+import redis
 
 def stone_update(request, game_id):
     """Update stone state with users move."""
@@ -55,6 +56,9 @@ def stone_update(request, game_id):
         # Update stone state
         stone.save()
 
+def emit_board_update(game_id, channel):
+    redis.StrictRedis().publish(channel, get_board_update_json(game_id))
+
 def get_board_update_json(game_id):
     """Serialize board stones and additional data for board update."""
 
@@ -89,6 +93,9 @@ def get_board_update_json(game_id):
         'next_move_color'       : next_move_color,
         'latest_placed_stone'   : latest_placed_stone,
     })
+
+def emit_chat_update(game_id, channel):
+    redis.StrictRedis().publish(channel, get_chat_update_json(game_id))
 
 def chat_update(request, game_id):
     chat = Chat.objects.get(pk=game_id)
