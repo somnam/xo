@@ -8,7 +8,7 @@ from mock import Mock
 
 class StoneCreateFormTest(TestCase):
     # Load fixtures
-    fixtures = ['auth', 'common', 'go']
+    fixtures = ['authorization', 'common', 'go']
 
     def test_Coordinates_CheckExistingStone_RaisesException(self):
         "Checking stone with existing coordinates."
@@ -71,7 +71,7 @@ class StoneCreateFormTest(TestCase):
 
 class StoneDeleteFormTest(TestCase):
     # Load fixtures
-    fixtures = ['auth', 'common', 'go']
+    fixtures = ['authorization', 'common', 'go']
 
     def test_CanRemoveStone_RemoveStoneFromBoardBeforeMove_RaisesException(self):
         "Checking if user can remove stone from board before his move"

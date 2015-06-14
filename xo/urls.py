@@ -20,7 +20,7 @@ urlpatterns = patterns(
     url(r'^$', 'go.views.game_list', name='home'),
     
     # Auth views
-    url(r'^', include('auth.urls')),
+    url(r'^', include('authorization.urls')),
 
     # Go views
     url(r'^go/', include('go.urls')),

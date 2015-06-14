@@ -1,19 +1,20 @@
 {% extends "registration/base.html" %}
 
-{% block title %} Hello {% endblock %}
+{% block title %} GO - Please sing in {% endblock %}
 
 {% block content %}
 
-<div class="auth">
-  <form method="post" action="{% url "auth.views.login" %}">
+<div class="container">
+  <form class="form-signin" method="post" action="{% url "authorization.views.login" %}">
     {% csrf_token %}
 
-    {% include "common/includes/form.html" %}
+    <h2 class="form-signin-heading">Please sign in</h2>
 
-    <input class="submit" type="submit" value="Login" />
-    <input type="hidden" name="next" value="{{ next }}" />
+    {% include "common/includes/textinput.html" with field=form.username %}
+    {% include "common/includes/password.html" with field=form.password %}
+
+    <button class="btn btn-lg btn-primary btn-block" type="submit" value="Login">Sign in</button>
+    <input type="hidden" name="next" value="{{next}}" />
   </form>
-
 </div>
-
 {% endblock %}

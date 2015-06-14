@@ -3,15 +3,17 @@
 {% block title %} Signup now ! {% endblock %}
 
 {% block content %}
-
-<div class="auth">
-  <form method="post" action="">
+<div class="container">
+  <form class="form-signin" method="post" action="">
     {% csrf_token %}
 
-    {% include "common/includes/form.html" %}
+    <h2 class="form-signin-heading">Please sign up</h2>
 
-    <input class="submit" type="submit" value="Create account" />
+    {% include "common/includes/textinput.html" with field=form.username %}
+    {% include "common/includes/password.html" with field=form.password1 %}
+    {% include "common/includes/password.html" with field=form.password2 %}
+
+    <button class="btn btn-lg btn-primary btn-block" type="submit" value="">Create account</button>
   </form>
 </div>
-
 {% endblock %}

@@ -30,7 +30,7 @@ def register(request):
             # Form is ok - store new user
             form.save()
             # Redirect to login page
-            return redirect('auth.views.login')
+            return redirect('authorization.views.login')
     # Init
     else:
         form = UserCreationForm()

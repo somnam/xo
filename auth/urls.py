@@ -4,7 +4,7 @@ urlpatterns = patterns(
     # Prefix for all urls in current pattern list
     '',
 
-    url(r'^login/', 'auth.views.login'),
+    url(r'^login/', 'authorization.views.login'),
     url(r'^logout/', 'django.contrib.auth.views.logout_then_login'),
-    url(r'^register/', 'auth.views.register'),
+    url(r'^register/', 'authorization.views.register'),
 )

@@ -6,7 +6,7 @@ from common.models import Game
 
 class BoardTest(TestCase):
     # Load fixtures
-    fixtures = ['auth', 'common']
+    fixtures = ['authorization', 'common']
 
     def test_CreateBoard_CreatesInstance(self):
         "Creating empty Board instance"
@@ -122,7 +122,7 @@ class BoardTest(TestCase):
 
 class BoardTestWithGoFixture(TestCase):
     # Load fixtures
-    fixtures = ['auth', 'common', 'go']
+    fixtures = ['authorization', 'common', 'go']
 
     def test_GetLatestPlacedStoneColorCode_GetColorForEmptyBoard_ReturnsColorCode(self):
         "Get color code of latest placed stone for empty board."
@@ -139,7 +139,7 @@ class BoardTestWithGoFixture(TestCase):
 
 class StoneTest(TestCase):
     # Load fixtures
-    fixtures = ['auth', 'common', 'go']
+    fixtures = ['authorization', 'common', 'go']
 
     def test_AddStone_CreatesInstance(self):
         "Creating stone instance"

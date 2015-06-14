@@ -1,12 +1,12 @@
 from django.core.exceptions import ObjectDoesNotExist
 from django.core import serializers
 from django.forms.models import model_to_dict
-from django.utils import simplejson
 from django.utils.timezone import get_current_timezone
 from django.contrib.auth.models import User
 from go.models import Board
 from go.forms import StoneCreateForm, StoneDeleteForm
 from common.models import Chat, Message
+import simplejson
 import redis
 
 def stone_update(request, game_id):

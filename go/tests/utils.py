@@ -1,14 +1,14 @@
 from django.test import TestCase
-from django.utils import simplejson
 from django.contrib.auth.models import User
 from common.models import Game
 from go.models import Board
+import simplejson
 import go.utils
 from mock import Mock
 
 class UtilTest(TestCase):
     # Load fixtures
-    fixtures = ['auth', 'common', 'go']
+    fixtures = ['authorization', 'common', 'go']
 
     def test_GetBoardUpdateJson_EmptyBoard_ReturnsJson(self):
         "Serializing update data for empty board."

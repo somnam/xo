@@ -4,7 +4,7 @@ from common.models import Game, Chat, Message, MESSAGE_TYPES
 
 class GameTest(TestCase):
     # Load fixtures
-    fixtures = ['auth']
+    fixtures = ['authorization']
 
     def test_CreateGame_CreatesInstance(self):
         "Creating Game instance"
@@ -66,7 +66,7 @@ class GameTest(TestCase):
 
 class MessageTest(TestCase):
     # Load fixtures
-    fixtures = ['auth', 'common']
+    fixtures = ['authorization', 'common']
 
     def test_CreateMessage_CreatesInstance(self):
 
@@ -129,7 +129,7 @@ class MessageTest(TestCase):
 
 class ChatTest(TestCase):
     # Load fixtures
-    fixtures = ['auth', 'common']
+    fixtures = ['authorization', 'common']
 
     def test_CreateChat_CreatesInstance(self):
 
