@@ -1,21 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8">
+    {# Ensure proper rendering on mobile devices. #}
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>{% block title %}{% endblock %}</title>
 
-    <!-- Base JS scripts. -->
-    <script type="text/javascript" src="{{ STATIC_URL }}common/js/jquery.min.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}common/js/jquery-cookie.min.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}common/js/base.js"></script>
-
-    <!-- Base css scripts. -->
+    {% block css %}
     <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}common/css/base.css" />
-
-    <!-- Custom css scripts. -->
-    {% block css %}{% endblock %}
+    {% endblock %}
   </head>
   <body>
     {% block header %}
@@ -42,6 +36,11 @@
     {% block footer %}
     <div id="footer"></div>
     {% endblock %}
+
+    <!-- Base JS scripts. -->
+    <script type="text/javascript" src="{{ STATIC_URL }}common/js/jquery.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}common/js/jquery-cookie.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}common/js/base.js"></script>
 
     <!-- Custom JS scripts. -->
     {% block js %}{% endblock %}

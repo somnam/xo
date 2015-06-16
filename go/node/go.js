@@ -2,11 +2,6 @@
 var server  = require('http').createServer().listen(4040);
 var io      = require('socket.io').listen(server);
 
-// Set socket.io settings.
-io.enable('browser client minification');
-io.enable('browser client etag');
-io.enable('browser client gzip');
-
 // Do something with all sockets on succesfull connection.
 io.sockets.on('connection', function (socket) {
     // Listen for 'subscribe' event on each socket.

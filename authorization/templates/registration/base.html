@@ -11,15 +11,15 @@
   <div class="navbar navbar-default navbar-static-top">
     <div class="container">
       <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
         <a class="navbar-brand" href="#">GO</a>
       </div>
-      <div class="navbar-collapse collapse">
-        <ul class="nav navbar-nav">
+      <div id="navbar-collapse-1" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-right">
           <li class="{% nav_class request 'authorization.views.login' %}"><a href="{% url "authorization.views.login" %}">Login</a></li>
           {% if user.is_authenticated %}
           <li class="{% nav_class request 'django.contrib.auth.views.logout_then_login' %}"><a href="{% url "django.contrib.auth.views.logout_then_login" %}">Logout</a></li>
@@ -34,6 +34,15 @@
 
 {% block footer %}
 <div class="container">
-  <p class="text-muted credit">Copyleft.</p>
+  <hr/>
+  <div class="row">
+    <div class="col-xs-12">
+      <footer><p class="text-muted credit">Copyleft.</p></footer>
+    </div>
+  </div>
 </div>
+{% endblock %}
+
+{% block js %}
+  <script type="text/javascript" src="{{STATIC_URL}}authorization/js/bootstrap.min.js" />
 {% endblock %}
