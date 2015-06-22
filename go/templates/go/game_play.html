@@ -1,11 +1,10 @@
-{% extends 'common/base.html' %}
+{% extends "common/base.html" %}
 
 {% load tags_extras %}
 
 {% block title %}Go{% endblock %}
 
 {% block css %}
-<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}common/css/base.css" />
 <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}go/css/game_play.css" />
 {% endblock %}
 
@@ -15,6 +14,9 @@
 <script src="{{ STATIC_URL }}go/js/game_play.js"></script>
 {% endblock %}
 
+{% block header-nav %}
+<li><a href="{% url "go.views.game_create" %}">Add Game</a></li>
+{% endblock %}
 
 {% block content %}
 <div class="board-wrapper">
