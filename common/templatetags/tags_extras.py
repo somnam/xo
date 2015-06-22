@@ -10,16 +10,12 @@ def get_range(value, start=0):
     """
     return range(start,value+start)
 
-@register.filter
-def is_even(value):
-    """
-    Returns true for even numeric values.
-    """
-    return False if value % 2 else True
-
 @register.simple_tag
 def nav_class(request, urls):
-    nav_class = ''
-    if request.path in ( reverse(url) for url in urls.split() ):
-        nav_class = 'active'
-    return nav_class
+    return 'active' if request.path in (reverse(url) for url in urls.split()) else ''
+
+@register.simple_tag
+def form_group_class(field):
+    classes = ['form-group']
+    if field.errors: classes.append('has-error')
+    return ' '.join(classes)

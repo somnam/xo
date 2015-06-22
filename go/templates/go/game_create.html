@@ -1,21 +1,7 @@
 {% extends "common/base.html" %}
 
-{% block css %}
-<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}common/css/base.css" />
-<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}go/css/game_create.css" />
-{% endblock %}
-
 {% block content %}
-
-<div class="game-create">
-  <form method="post" action="{% url "go.views.game_create" %}">
-    {% csrf_token %}
-
-    {% include "common/includes/form.html" %}
-
-    <input class="submit" type="submit" value="Create" />
-
-  </form>
+<div class="container">
+  {% include "common/includes/form.html" with submit_label="Create" %}
 </div>
-
 {% endblock %}

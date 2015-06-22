@@ -1,3 +1,5 @@
+{% load tags_extras %}
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -7,42 +9,60 @@
 
     <title>{% block title %}{% endblock %}</title>
 
-    {% block css %}
-    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}common/css/base.css" />
-    {% endblock %}
+    {# Base css scripts. #}
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}common/css/bootstrap.min.css" />
+
+    {# Custom css scripts. #}
+    {% block css %}{% endblock %}
   </head>
   <body>
-    {% block header %}
-    <div id="site-header">
-      <div class="header-content">
-        <h1><a href="{% url "authorization.views.login" %}">go</a></h1>
-
-        <ul class="header-nav">
-          {% if user.is_authenticated %}
-          {% block header-nav %}{% endblock %}
-          <li><a href="{% url "django.contrib.auth.views.logout_then_login" %}">logout</a></li>
-          {% else %}
-          <li><a href="{% url "authorization.views.register" %}">register</a></li>
-          {% endif %}
-        </ul>
+    {# Navigation bar. #}
+    <div class="navbar navbar-default navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="{% url "authorization.views.login" %}">GO</a>
+        </div>
+        <div id="navbar-collapse-1" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            {% if user.is_authenticated %}
+              {% block header-nav %}{% endblock %}
+              <li class="{% nav_class request 'django.contrib.auth.views.logout_then_login' %}"><a href="{% url "django.contrib.auth.views.logout_then_login" %}">Logout</a></li>
+            {% else %}
+              <li class="{% nav_class request 'authorization.views.login' %}"><a href="{% url "authorization.views.login" %}">Login</a></li>
+              <li class="{% nav_class request 'authorization.views.register' %}"><a href="{% url "authorization.views.register" %}">Register</a></li>
+            {% endif %}
+          </ul>
+        </div>
       </div>
     </div>
-    {% endblock %}
 
+    {# Content. #}
     <div id="content">
       {% block content %}{% endblock %}
     </div>
 
-    {% block footer %}
-    <div id="footer"></div>
-    {% endblock %}
+    {# Footer. #}
+    <div class="container">
+      <hr/>
+      <div class="row">
+        <div class="col-xs-12">
+          <footer><p class="text-muted credit">Copyleft.</p></footer>
+        </div>
+      </div>
+    </div>
 
-    <!-- Base JS scripts. -->
-    <script type="text/javascript" src="{{ STATIC_URL }}common/js/jquery.min.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}common/js/jquery-cookie.min.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}common/js/base.js"></script>
+    {# Base JS scripts. #}
+    <script type="text/javascript" src="{{STATIC_URL}}common/js/jquery.min.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}common/js/jquery-cookie.min.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}authorization/js/bootstrap.min.js" />
+    <script type="text/javascript" src="{{STATIC_URL}}common/js/base.js"></script>
 
-    <!-- Custom JS scripts. -->
+    {# Custom JS scripts. #}
     {% block js %}{% endblock %}
   </body>
 </html>
