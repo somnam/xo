@@ -1,0 +1,7 @@
+{% load tags_extras %}
+
+<div class="form-group {{ field|add_error_class }}">
+  {{ field }}
+  {% include "common/includes/field_help.html" %}
+  {% include "common/includes/field_errors.html" %}
+</div>

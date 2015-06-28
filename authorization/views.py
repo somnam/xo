@@ -3,8 +3,8 @@
 import django.contrib.auth.views
 
 from django.conf import settings
-from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import redirect, render
+from django.contrib.auth.forms import UserCreationForm
 
 def login(request):
     response = None

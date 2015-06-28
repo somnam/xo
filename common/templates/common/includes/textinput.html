@@ -1,9 +1,9 @@
 {% load tags_extras %}
 
-<div class="{% form_group_class field %}">
+<div class="form-group {{ field|add_error_class }}">
   <input  {# Textinput #}
           type="text"
-          class="form-control"
+          class="form-control {{field.css_classes}}"
           {# Field id is in 'id_for_label' attr. #}
           id="{{field.id_for_label}}" 
           {# Field name is in 'html_name' attr. #}
@@ -12,5 +12,6 @@
           maxlength="{{field.field.max_length}}" 
           {# Use label as placeholder. #}
           placeholder="{{field.label}}" autofocus>
-  {% include "common/includes/form_field_error.html" %}
+  {% include "common/includes/field_help.html" %}
+  {% include "common/includes/field_errors.html" %}
 </div>

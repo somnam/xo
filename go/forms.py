@@ -5,13 +5,20 @@ from go.models import Board, BOARD_SIZE_CHOICES, STONE_COLORS
 from common.models import Game, Chat
 
 class GameCreateForm(forms.Form):
+    labels = {
+        'name': 'Game name',
+        'size': 'Board size',
+    }
+
     name = forms.CharField(
         max_length=128,
-        label="Game name",
+        label=labels['name'],
     )
     size = forms.ChoiceField(
         choices=BOARD_SIZE_CHOICES,
-        label="Board size"
+        label=labels['size'],
+        # FIXME: move to select widget.
+        widget=forms.Select(attrs={'class': 'form-control'}),
     )
 
     def __init__(self, user=None, *args, **kwargs):

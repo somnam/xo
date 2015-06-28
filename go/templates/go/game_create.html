@@ -2,6 +2,16 @@
 
 {% block content %}
 <div class="container">
-  {% include "common/includes/form.html" with submit_label="Create" %}
+  <form role="form" method="post" action=".">
+    {% csrf_token %}
+    <div class="row">
+      <div class="col-xs-offset-4 col-xs-4">
+      {% include "common/includes/non_field_errors.html" %}
+      {% include "common/includes/textinput.html" with field=form.name %}
+      {% include "common/includes/select.html" with field=form.size %}
+      {% include "common/includes/submit.html" with label="Create" %}
+    </div>
+  </div>
+  </form>
 </div>
 {% endblock %}

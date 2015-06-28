@@ -1,6 +1,5 @@
 # Create your views here.
 
-from threading import Event
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render, Http404
 from django.http import HttpResponse 
