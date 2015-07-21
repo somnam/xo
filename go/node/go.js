@@ -24,7 +24,6 @@ client.on('ready', function() {
 // Upon receiving an event from redis channel, post the event to socket.io.
 client.on('message', function (channel, message) {
     // Get all sockets in channel with same name as redis client channel.
-    io.sockets.in(channel)
     // Emit 'message' event to socket.io in browser.
-              .emit('message', { channel: channel, message: message });
+    io.sockets.in(channel).emit('message', { channel: channel, message: message });
 });
