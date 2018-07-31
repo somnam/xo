@@ -43,10 +43,10 @@ MESSAGE_TYPES = {
 }
 class Message(models.Model):
     MESSAGE_TYPE_CHOICES = (
-        ('j', u'join'),
-        ('m', u'message'),
-        ('l', u'leave'),
-        ('n', u'notification'),
+        ('j', 'join'),
+        ('m', 'message'),
+        ('l', 'leave'),
+        ('n', 'notification'),
     )
 
     chat      = models.ForeignKey(Chat)
@@ -73,19 +73,19 @@ class Message(models.Model):
 
         type_to_message = {
             MESSAGE_TYPES['join'] : (
-                u"User '%s' has joined the chat." % 
+                "User '%s' has joined the chat." % 
                 self.author
             ),
             MESSAGE_TYPES['leave'] : (
-                u"User '%s' has left the chat." % 
+                "User '%s' has left the chat." % 
                 self.author
             ),
         }
 
         message = self.message
-        if type_to_message.has_key(self.type):
+        if self.type in type_to_message:
             message = type_to_message[self.type]
         self.message = message
 
-    def __unicode__(self):
+    def __str__(self):
         return self.message

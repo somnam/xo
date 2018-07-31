@@ -84,7 +84,7 @@ class MessageTest(TestCase):
         message = Message(chat=chat, author=user, type=MESSAGE_TYPES['join'])
         message.save()
         self.assertEqual(
-            unicode(message),
+            str(message),
             "User 'test1' has joined the chat."
         )
 
@@ -96,7 +96,7 @@ class MessageTest(TestCase):
         message = Message(chat=chat, author=user, type=MESSAGE_TYPES['leave'])
         message.save()
         self.assertEqual(
-            unicode(message),
+            str(message),
             "User 'test1' has left the chat."
         )
 
@@ -107,12 +107,12 @@ class MessageTest(TestCase):
         message = Message(
             chat=chat, 
             type=MESSAGE_TYPES['notification'],
-            message=u'This is a notification.'
+            message='This is a notification.'
         )
         message.save()
         self.assertEqual(
-            unicode(message),
-            u'This is a notification.',
+            str(message),
+            'This is a notification.',
         )
 
     def test_CreateMessage_PrintsMessage(self):
@@ -120,11 +120,11 @@ class MessageTest(TestCase):
         # Create Message
         chat    = Chat.objects.get(pk=1)
         user    = User.objects.get(pk=1)
-        message = Message(chat=chat, author=user, message=u'This is a message.')
+        message = Message(chat=chat, author=user, message='This is a message.')
         message.save()
         self.assertEqual(
-            (u'[%s]: %s' % (message.author, unicode(message))),
-            u'[test1]: This is a message.',
+            ('[%s]: %s' % (message.author, str(message))),
+            '[test1]: This is a message.',
         )
 
 class ChatTest(TestCase):

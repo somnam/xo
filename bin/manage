@@ -1,3 +1,0 @@
-#!/bin/bash
-export PROJ_DIR=~/workspace/Django/xo
-python -tt $PROJ_DIR/manage.py $@

@@ -180,9 +180,9 @@ LOGIN_REDIRECT_URL = '/'
 
 # Load local settings configuration.
 try:
-    LOCAL_SETTINGS
+    LOCAL_SETTINGS is True
 except NameError:
     try:
-        from local_settings import *
+        from .local_settings import *
     except ImportError:
         pass

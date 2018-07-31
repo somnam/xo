@@ -6,9 +6,9 @@ from common.models import Game
 
 # Board
 BOARD_SIZE_CHOICES = (
-    (u'9x9',   u'Small'),
-    (u'13x13', u'Regular'),
-    (u'19x19', u'Large'),
+    ('9x9',   'Small'),
+    ('13x13', 'Regular'),
+    ('19x19', 'Large'),
 )
 STONE_COLORS = {
     'black' : 0,
@@ -39,10 +39,7 @@ class Board(models.Model):
         super(Board, self).__init__(*args, **kwargs)
 
         # Set rows and cols values
-        self.rows,self.columns = map(
-            lambda(c) : int(c),
-            self.size.split('x')
-        )
+        self.rows,self.columns = [ int(c) for c in self.size.split('x') ]
 
     def add_stones(self, user, color):
         """Append stones of given color to given user."""
@@ -117,7 +114,7 @@ class Board(models.Model):
         # Map by row and column
         placed_stones = {}
         for stone in stones:
-            if not placed_stones.has_key(stone.row):
+            if stone.row not in placed_stones:
                 placed_stones[stone.row] = {}
             placed_stones[stone.row][stone.col] = stone
 

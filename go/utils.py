@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from go.models import Board
 from go.forms import StoneCreateForm, StoneDeleteForm
 from common.models import Chat, Message
-import simplejson
+import json
 import redis
 
 def stone_update(request, game_id):
@@ -14,7 +14,7 @@ def stone_update(request, game_id):
 
     # Get user action performed on stone (by default assume 'add')
     action = 'add'
-    if request.POST.has_key('action'):
+    if 'action' in request.POST:
         action = request.POST['action']
 
     # Get game board
@@ -66,7 +66,7 @@ def get_board_update_json(game_id):
     board = Board.objects.get(pk=game_id)
 
     # First convert placed stones query to python struct, so it can be easily
-    # serialized via simplejson
+    # serialized via json
     serialize_fields  = ('row', 'col', 'color')
     placed_stones     = board.get_placed_stones()
     serialized_stones = serializers.serialize(
@@ -88,7 +88,7 @@ def get_board_update_json(game_id):
             fields=serialize_fields
         )[0]
 
-    return simplejson.dumps({
+    return json.dumps({
         'placed_stones'         : serialized_stones,
         'next_move_color'       : next_move_color,
         'latest_placed_stone'   : latest_placed_stone,
@@ -132,6 +132,6 @@ def get_chat_update_json(game_id):
         # Append formated timestamp
         message['fields']['timestamp'] = timestamp.strftime('%X')
 
-    return simplejson.dumps({
+    return json.dumps({
         'chat_messages' : chat_messages,
     })

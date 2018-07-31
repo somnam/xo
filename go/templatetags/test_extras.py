@@ -9,10 +9,10 @@ def make_cell_id(row, col):
 @register.filter
 def get_stone(stones, cell_id):
     # Split coordinates in cell id
-    row,col = map(lambda(v): int(v), cell_id.split('-'))
+    row,col = (int(x) for x in cell_id.split('-'))
 
     # Check if current row and column contains stone
-    has_stone = stones.has_key(row) and stones[row].has_key(col)
+    has_stone = row in stones and col in stones[row]
 
     # Return stone color if it's placed in current cell
     return stones[row][col] if has_stone else None

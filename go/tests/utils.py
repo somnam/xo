@@ -1,14 +1,16 @@
+import json
+import go.utils
 from django.test import TestCase
 from django.contrib.auth.models import User
 from common.models import Game
 from go.models import Board
-import simplejson
-import go.utils
-from mock import Mock
+from unittest.mock import Mock
 
 class UtilTest(TestCase):
     # Load fixtures
     fixtures = ['authorization', 'common', 'go']
+
+    maxDiff = None
 
     def test_GetBoardUpdateJson_EmptyBoard_ReturnsJson(self):
         "Serializing update data for empty board."
@@ -19,7 +21,7 @@ class UtilTest(TestCase):
         board = Board(game_id=game.id)
         board.save()
 
-        expect = simplejson.dumps({
+        expect = json.dumps({
             'placed_stones'         : [],
             'next_move_color'       : 'black',
             'latest_placed_stone'   : None,
@@ -32,7 +34,7 @@ class UtilTest(TestCase):
     def test_GetBoardUpdateJson_BoardWithStones_ReturnsJson(self):
         "Serializing update data for board with set stones."
 
-        expect = simplejson.dumps({
+        expect = {
             'placed_stones'         : [
                 { 
                     'pk'        : 1, 
@@ -61,11 +63,11 @@ class UtilTest(TestCase):
                 'model'         : 'go.stone', 
                 'fields'        : {'color': 1, 'col': 1, 'row': 0},
             },
-        })
+        }
 
-        result = go.utils.get_board_update_json(1)
+        result = json.loads(go.utils.get_board_update_json(game_id=1))
 
-        self.assertEqual(result, expect)
+        self.assertDictEqual(result, expect)
 
     def test_StoneUpdate_AddInvalidStone_AddsStone(self):
 
@@ -183,7 +185,7 @@ class UtilTest(TestCase):
         )
 
     def test_GetChatUpdateJson_ChatWithMessages_ReturnsJson(self):
-        expect = simplejson.dumps({
+        expect = {
             'chat_messages': [
                 {
                     'pk'        : 1,
@@ -226,9 +228,9 @@ class UtilTest(TestCase):
                     },
                 },
             ],
-        })
+        }
 
-        result = go.utils.get_chat_update_json(1)
+        result = json.loads(go.utils.get_chat_update_json(game_id=1))
 
-        self.assertEqual(result, expect)
+        self.assertDictEqual(result, expect)
 

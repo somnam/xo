@@ -116,10 +116,7 @@ def game_update(request, game_id):
 
     if request.method == "POST":
         # Ajax sends stone coords when we need to update Board state.
-        has_stone = (
-            request.POST.has_key('row') and
-            request.POST.has_key('col')
-        )
+        has_stone = 'row' in request.POST and 'col' in request.POST
 
         # Update Board state after current players move.
         if has_stone:
@@ -137,7 +134,7 @@ def game_update(request, game_id):
 def chat_say(request, game_id):
     if request.method == "POST":
         # Update chat state after current players message
-        if request.POST.has_key('message'):
+        if 'message' in request.POST:
             # Update chat state with users message.
             go.utils.chat_update(request, game_id)
 
